@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+# Kraken2 output explained: https://github.com/DerrickWood/kraken2/wiki/Manual#output-formats. 
+
+import sys
+import json
+import argparse
+from collections import defaultdict
+
+def read_kraken2(file_name, pct_threshold, num_threshold):
+    with open(file_name) as kraken2:
+        lines = kraken2.readlines()
+    
+    result = defaultdict(list)
+    result['Thresholds'] = {'Percentage': pct_threshold, 'Reads': num_threshold}
+    
+    for  line in lines:
+        pc_frags, frags_rooted, _, rank_code, ncbi_taxon_id, name = line.split('\t')
+        pc_frags = pc_frags.strip()
+        name = name.replace('\n','').strip()
+        pc_frags_num = float(pc_frags)
+        frags_rooted_num = int(frags_rooted)
+        ncbi_taxon_id = int(ncbi_taxon_id)
+
+        if pc_frags_num  >= pct_threshold  or frags_rooted_num >= num_threshold or  name == 'Homo sapiens':
+            if 	rank_code == 'S':
+                result['Species'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
+            if  rank_code == 'G':
+                result['Genus'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
+            if  rank_code == 'F':
+                result['Family'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
+            if  ('Mycobact' in name) and (rank_code == 'G1'):
+                result['Genus1'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
+    return result
+
+def sort_result(result, pct_threshold, num_threshold):
+    if len(result['Family']) == 0: 
+        result['Family'] = [f"ERROR: no genus classifications meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads"]
+    else:
+        result['Family'] = sorted(result['Family'], key=lambda k: k['reads'], reverse=True)
+        if result['Family'][0]['name'] == 'Mycobacteriaceae':
+            result['Family'][0]['Mykrobe'] = True
+            result['Family'][0]['Notes'] = 'For higher-resolution classification, see Mykrobe report'
+
+    if len(result['Species']) == 0: 
+        result['Species'] = [f"ERROR: no species classifications meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads"]
+    else:
+        result['Species'] = sorted(result['Species'], key=lambda k: k['reads'], reverse=True)
+
+    if len(result['Genus']) == 0:
+        result['Genus'] = [f"ERROR: no genus classifications meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads"]
+    else:
+        result['Genus'] = sorted(result['Genus'], key=lambda k: k['reads'], reverse=True)
+
+    if len(result['Genus1']) == 0:
+        result['Genus1'] = [f"ERROR: no 'Mycobacterium tuberculosis complex' meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads"]
+    else:
+        result['Genus1'] = sorted(result['Genus1'], key=lambda k: k['reads'], reverse=True)
+
+    return result
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-k", "--kraken_file", help="kraken2 output file")
+    parser.add_argument("-p", "--pct_reads", default=1, help="threshold of percentage of reads, default 1%")
+    parser.add_argument("-n", "--number_reads", default=100000, help="threshold of number of reads, default 100k")
+    parser.add_argument("-o", "--output_file", default='output.json', help="output json file, default output.json")
+    args = parser.parse_args()
+
+    print(f'File:{args.kraken_file}, pct_reads: {args.pct_reads}, number_reads: {args.number_reads}')
+    result = read_kraken2(args.kraken_file, args.pct_reads, args.number_reads)
+    output = sort_result(result, args.pct_reads, args.number_reads)
+    pretty_output = json.dumps(output, indent=4, sort_keys=True)
+    print(pretty_output)
+
+    with open(args.output_file, 'w') as outfile:
+        json.dump(output, outfile)
