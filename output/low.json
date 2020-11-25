@@ -1,1 +1,58 @@
-"{\n    \"Thresholds\": {\n        \"Percentage\": 1,\n        \"Reads\": 100000\n    },\n    \"Family\": [\n        {\n            \"reads\": 552246,\n            \"percentage\": 99.14,\n            \"name\": \"Mycobacteriaceae\",\n            \"taxon\": 1762,\n            \"Mykrobe\": true,\n            \"Notes\": \"For higher-resolution classification, see Mykrobe report\"\n        }\n    ],\n    \"Genus\": [\n        {\n            \"reads\": 550589,\n            \"percentage\": 98.84,\n            \"name\": \"Mycobacterium\",\n            \"taxon\": 1763\n        }\n    ],\n    \"Genus1\": [\n        {\n            \"reads\": 112223,\n            \"percentage\": 20.15,\n            \"name\": \"Mycobacterium avium complex (MAC)\",\n            \"taxon\": 120793\n        },\n        {\n            \"reads\": 93315,\n            \"percentage\": 16.75,\n            \"name\": \"Mycobacterium tuberculosis complex\",\n            \"taxon\": 77643\n        }\n    ],\n    \"Species\": [\n        {\n            \"reads\": 103762,\n            \"percentage\": 18.63,\n            \"name\": \"Mycobacterium avium\",\n            \"taxon\": 1764\n        },\n        {\n            \"reads\": 43287,\n            \"percentage\": 7.77,\n            \"name\": \"Mycobacterium tuberculosis\",\n            \"taxon\": 1773\n        },\n        {\n            \"reads\": 98,\n            \"percentage\": 0.02,\n            \"name\": \"Homo sapiens\",\n            \"taxon\": 9606\n        }\n    ]\n}"
+{
+    "Thresholds": {
+        "Percentage": 1,
+        "Reads": 100000
+    },
+    "Family": [
+        {
+            "reads": 552246,
+            "percentage": 99.14,
+            "name": "Mycobacteriaceae",
+            "taxon": 1762,
+            "Mykrobe": true,
+            "Notes": "For higher-resolution classification, see Mykrobe report"
+        }
+    ],
+    "Genus": [
+        {
+            "reads": 550589,
+            "percentage": 98.84,
+            "name": "Mycobacterium",
+            "taxon": 1763
+        }
+    ],
+    "Genus1": [
+        {
+            "reads": 112223,
+            "percentage": 20.15,
+            "name": "Mycobacterium avium complex (MAC)",
+            "taxon": 120793
+        },
+        {
+            "reads": 93315,
+            "percentage": 16.75,
+            "name": "Mycobacterium tuberculosis complex",
+            "taxon": 77643
+        }
+    ],
+    "Species": [
+        {
+            "reads": 103762,
+            "percentage": 18.63,
+            "name": "Mycobacterium avium",
+            "taxon": 1764
+        },
+        {
+            "reads": 43287,
+            "percentage": 7.77,
+            "name": "Mycobacterium tuberculosis",
+            "taxon": 1773
+        },
+        {
+            "reads": 98,
+            "percentage": 0.02,
+            "name": "Homo sapiens",
+            "taxon": 9606
+        }
+    ]
+}

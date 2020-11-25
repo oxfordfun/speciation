@@ -73,4 +73,4 @@ if __name__ == '__main__':
     print(pretty_output)
 
     with open(args.output_file, 'w') as outfile:
-        json.dump(pretty_output, outfile)
+        outfile.write(pretty_output)
