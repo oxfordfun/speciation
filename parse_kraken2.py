@@ -34,27 +34,39 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
 
 def sort_result(result, pct_threshold, num_threshold):
     if len(result['Family']) == 0: 
-        result['Family'] = [f"ERROR: no genus classifications meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads"]
+         result['Family'] = {
+            "error": f'No family classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            }
     else:
         result['Family'] = sorted(result['Family'], key=lambda k: k['reads'], reverse=True)
-        if result['Family'][0]['name'] == 'Mycobacteriaceae':
-            result['Family'][0]['Mykrobe'] = True
-            result['Family'][0]['Notes'] = 'For higher-resolution classification, see Mykrobe report'
 
     if len(result['Species']) == 0: 
-        result['Species'] = [f"ERROR: no species classifications meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads"]
+        result['Species'] = {
+            "error": f'No species classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            }
     else:
         result['Species'] = sorted(result['Species'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Genus']) == 0:
-        result['Genus'] = [f"ERROR: no genus classifications meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads"]
+        result['Genus'] = {
+            "error": f'No genus classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            }
     else:
         result['Genus'] = sorted(result['Genus'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Genus1']) == 0:
-        result['Genus1'] = [f"ERROR: no 'Mycobacterium tuberculosis complex' meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads"]
+        result['Genus1'] = {
+            "mykrobe": False,
+            "error": f'No Mycobacterium tuberculosis complex meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            }
     else:
         result['Genus1'] = sorted(result['Genus1'], key=lambda k: k['reads'], reverse=True)
+        if result['Genus1'][0]['name'] == 'Mycobacterium tuberculosis complex':
+            result['Genus1'][0]['mykrobe'] = True
+            result['Genus1'][0]['notes'] = 'For higher-resolution classification, see Mykrobe report'
+        else:
+            result['Genus1'][0]['mykrobe'] = False
+            result['Genus1'][0]['notes'] = 'Mixed or contaiminated sample. no further processing'       
 
     return result
 
