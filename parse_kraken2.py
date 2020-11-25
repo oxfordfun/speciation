@@ -69,8 +69,8 @@ if __name__ == '__main__':
     print(f'File:{args.kraken_file}, pct_reads: {args.pct_reads}, number_reads: {args.number_reads}')
     result = read_kraken2(args.kraken_file, args.pct_reads, args.number_reads)
     output = sort_result(result, args.pct_reads, args.number_reads)
-    pretty_output = json.dumps(output, indent=4, sort_keys=True)
+    pretty_output = json.dumps(output, indent=4)
     print(pretty_output)
 
     with open(args.output_file, 'w') as outfile:
-        json.dump(output, outfile)
+        json.dump(pretty_output, outfile)
