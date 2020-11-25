@@ -1,0 +1,58 @@
+{
+    "Thresholds": {
+        "Percentage": 1,
+        "Reads": 100000
+    },
+    "Family": [
+        {
+            "reads": 1971621,
+            "percentage": 81.12,
+            "name": "Bacillaceae",
+            "taxon": 186817
+        },
+        {
+            "reads": 231449,
+            "percentage": 9.52,
+            "name": "Mycobacteriaceae",
+            "taxon": 1762
+        }
+    ],
+    "Genus": [
+        {
+            "reads": 1970541,
+            "percentage": 81.07,
+            "name": "Bacillus",
+            "taxon": 1386
+        },
+        {
+            "reads": 228648,
+            "percentage": 9.41,
+            "name": "Mycobacterium",
+            "taxon": 1763
+        }
+    ],
+    "Species": [
+        {
+            "reads": 1708112,
+            "percentage": 70.28,
+            "name": "Bacillus paralicheniformis",
+            "taxon": 1648923
+        },
+        {
+            "reads": 224590,
+            "percentage": 9.24,
+            "name": "Mycobacterium kansasii",
+            "taxon": 1768
+        },
+        {
+            "reads": 13452,
+            "percentage": 0.55,
+            "name": "Homo sapiens",
+            "taxon": 9606
+        }
+    ],
+    "Genus1": {
+        "mykrobe": false,
+        "error": "No Mycobacterium tuberculosis complex meet thresholds of > 100000 reads and > 1 % of total reads"
+    }
+}

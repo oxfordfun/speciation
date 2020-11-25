@@ -8,9 +8,7 @@
             "reads": 1017834,
             "percentage": 99.21,
             "name": "Mycobacteriaceae",
-            "taxon": 1762,
-            "Mykrobe": true,
-            "Notes": "For higher-resolution classification, see Mykrobe report"
+            "taxon": 1762
         }
     ],
     "Genus": [
@@ -26,7 +24,9 @@
             "reads": 902443,
             "percentage": 87.97,
             "name": "Mycobacterium avium complex (MAC)",
-            "taxon": 120793
+            "taxon": 120793,
+            "mykrobe": false,
+            "notes": "Mixed or contaiminated sample. no further processing"
         },
         {
             "reads": 21383,

@@ -1,0 +1,46 @@
+{
+    "Thresholds": {
+        "Percentage": 1,
+        "Reads": 100000
+    },
+    "Family": [
+        {
+            "reads": 1664211,
+            "percentage": 93.43,
+            "name": "Mycobacteriaceae",
+            "taxon": 1762
+        }
+    ],
+    "Genus": [
+        {
+            "reads": 1662829,
+            "percentage": 93.36,
+            "name": "Mycobacterium",
+            "taxon": 1763
+        }
+    ],
+    "Genus1": [
+        {
+            "reads": 206978,
+            "percentage": 11.62,
+            "name": "Mycobacterium tuberculosis complex",
+            "taxon": 77643,
+            "mykrobe": true,
+            "notes": "For higher-resolution classification, see Mykrobe report"
+        }
+    ],
+    "Species": [
+        {
+            "reads": 80198,
+            "percentage": 4.5,
+            "name": "Mycobacterium tuberculosis",
+            "taxon": 1773
+        },
+        {
+            "reads": 549,
+            "percentage": 0.03,
+            "name": "Homo sapiens",
+            "taxon": 9606
+        }
+    ]
+}

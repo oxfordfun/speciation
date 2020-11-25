@@ -1,0 +1,40 @@
+{
+    "Thresholds": {
+        "Percentage": 1,
+        "Reads": 100000
+    },
+    "Family": [
+        {
+            "reads": 1095170,
+            "percentage": 94.2,
+            "name": "Mycobacteriaceae",
+            "taxon": 1762
+        }
+    ],
+    "Genus": [
+        {
+            "reads": 1070646,
+            "percentage": 92.09,
+            "name": "Mycobacteroides",
+            "taxon": 670516
+        }
+    ],
+    "Species": [
+        {
+            "reads": 1059990,
+            "percentage": 91.18,
+            "name": "Mycobacteroides abscessus",
+            "taxon": 36809
+        },
+        {
+            "reads": 4146,
+            "percentage": 0.36,
+            "name": "Homo sapiens",
+            "taxon": 9606
+        }
+    ],
+    "Genus1": {
+        "mykrobe": false,
+        "error": "No Mycobacterium tuberculosis complex meet thresholds of > 100000 reads and > 1 % of total reads"
+    }
+}
