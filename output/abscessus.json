@@ -4,7 +4,7 @@
         "reads": 100000
     },
     "Mykrobe": {
-        "report": false,
+        "report": true,
         "notes": ""
     },
     "Family": [
