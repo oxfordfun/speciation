@@ -14,5 +14,5 @@ Scripts for Mycobacterium Speciation
 |mixed        |Mycobacteriaceae,Paenibacillaceae |Mycobacterium, Paenibacillus   | Mycobacterium tuberculosis complex    | Paenibacillus glucanolyticus, Homo sapiens                      | True    |           |
 |abscessus    |Mycobacteriaceae                  |Mycobacteroides                | N/A                                   | Mycobacteroides abscessus, Homo sapiens                         | True    |
 |xenopi       |Mycobacteriaceae                  |Mycobacterium                  | N/A                                   | Homo sapiens                                                    | True    |
-|kansasii     |Bacillaceae,Mycobacteriaceae      |Bacillus, Mycobacterium        | N/A                                   | Bacillus paralicheniformis, Mycobacterium kansasii, Homo sapiens| True    |
+|kansasii     |Bacillaceae,Mycobacteriaceae      |Bacillus, Mycobacterium        | N/A                                   | Bacillus paralicheniformis, Mycobacterium kansasii, Homo sapiens| False   |
 |unclassified |N/A                               |N/A                            | N/A                                   | N/A                                                             | False   |

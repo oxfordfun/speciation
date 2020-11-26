@@ -29,8 +29,6 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
                 result['Genus'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
             if  rank_code == 'F':
                 result['Family'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
-                if  ('Mycobacteriaceae' in name):
-                    result['Mykrobe']['report']= True
             if  ('Mycobact' in name) and (rank_code == 'G1'):
                 result['Species complex'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
     return result
@@ -42,6 +40,8 @@ def sort_result(result, pct_threshold, num_threshold):
             }
     else:
         result['Family'] = sorted(result['Family'], key=lambda k: k['reads'], reverse=True)
+        if  (result['Family'][0]['name'] == 'Mycobacteriaceae'):
+                    result['Mykrobe']['report']= True
 
     if len(result['Species']) == 0: 
         result['Species'] = {

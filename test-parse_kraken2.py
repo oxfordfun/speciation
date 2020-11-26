@@ -121,7 +121,7 @@ class TestParserKraken2(unittest.TestCase):
         self.assertTrue(sorted_result['Species'][0]['name'] == "Bacillus paralicheniformis")
         self.assertTrue(sorted_result['Species'][1]['name'] == "Mycobacterium kansasii")
         self.assertTrue(sorted_result['Species'][2]['name'] == "Homo sapiens")
-        self.assertTrue(sorted_result['Mykrobe']['report'] == True)
+        self.assertTrue(sorted_result['Mykrobe']['report'] == False)
 
     def test_sort_result_unclassified(self):
         input_file = 'data/unclassified.tab'
