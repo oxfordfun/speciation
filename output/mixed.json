@@ -31,14 +31,14 @@
             "taxon": 44249
         }
     ],
-    "Genus1": [
+    "Species complex": [
         {
             "reads": 129513,
             "percentage": 10.47,
             "name": "Mycobacterium tuberculosis complex",
             "taxon": 77643,
             "mykrobe": true,
-            "notes": "For higher-resolution classification, see Mykrobe report"
+            "notes": "For higher-resolution classification, see Mykrobe report."
         }
     ],
     "Species": [
@@ -47,12 +47,6 @@
             "percentage": 30.48,
             "name": "Paenibacillus glucanolyticus",
             "taxon": 59843
-        },
-        {
-            "reads": 52672,
-            "percentage": 4.26,
-            "name": "Mycobacterium tuberculosis",
-            "taxon": 1773
         },
         {
             "reads": 114,

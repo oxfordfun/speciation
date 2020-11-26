@@ -19,20 +19,14 @@
             "taxon": 1763
         }
     ],
-    "Genus1": [
+    "Species complex": [
         {
             "reads": 112223,
             "percentage": 20.15,
             "name": "Mycobacterium avium complex (MAC)",
             "taxon": 120793,
-            "mykrobe": false,
-            "notes": "Mixed or contaiminated sample. no further processing"
-        },
-        {
-            "reads": 93315,
-            "percentage": 16.75,
-            "name": "Mycobacterium tuberculosis complex",
-            "taxon": 77643
+            "mykrobe": true,
+            "notes": "Sample is mixed or contaminated. Be cautious with further processing."
         }
     ],
     "Species": [
@@ -41,12 +35,6 @@
             "percentage": 18.63,
             "name": "Mycobacterium avium",
             "taxon": 1764
-        },
-        {
-            "reads": 43287,
-            "percentage": 7.77,
-            "name": "Mycobacterium tuberculosis",
-            "taxon": 1773
         },
         {
             "reads": 98,

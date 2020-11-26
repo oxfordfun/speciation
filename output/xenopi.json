@@ -9,18 +9,6 @@
             "percentage": 21.8,
             "name": "Mycobacteriaceae",
             "taxon": 1762
-        },
-        {
-            "reads": 82093,
-            "percentage": 3.88,
-            "name": "Streptococcaceae",
-            "taxon": 1300
-        },
-        {
-            "reads": 21109,
-            "percentage": 1.0,
-            "name": "Nocardiaceae",
-            "taxon": 85025
         }
     ],
     "Genus": [
@@ -29,54 +17,18 @@
             "percentage": 13.72,
             "name": "Mycobacterium",
             "taxon": 1763
-        },
-        {
-            "reads": 81986,
-            "percentage": 3.88,
-            "name": "Streptococcus",
-            "taxon": 1301
-        },
-        {
-            "reads": 70927,
-            "percentage": 3.35,
-            "name": "Mycolicibacterium",
-            "taxon": 1866885
-        }
-    ],
-    "Genus1": [
-        {
-            "reads": 88367,
-            "percentage": 4.18,
-            "name": "Mycobacterium avium complex (MAC)",
-            "taxon": 120793,
-            "mykrobe": false,
-            "notes": "Mixed or contaiminated sample. no further processing"
-        },
-        {
-            "reads": 27409,
-            "percentage": 1.3,
-            "name": "Mycobacterium simiae complex",
-            "taxon": 2249310
         }
     ],
     "Species": [
-        {
-            "reads": 44267,
-            "percentage": 2.09,
-            "name": "Streptococcus gordonii",
-            "taxon": 1302
-        },
-        {
-            "reads": 43223,
-            "percentage": 2.04,
-            "name": "Mycobacterium avium",
-            "taxon": 1764
-        },
         {
             "reads": 509,
             "percentage": 0.02,
             "name": "Homo sapiens",
             "taxon": 9606
         }
-    ]
+    ],
+    "Species complex": {
+        "mykrobe": false,
+        "error": "No Mycobacterium tuberculosis complex meet thresholds of > 100000 reads and > 1 % of total reads"
+    }
 }

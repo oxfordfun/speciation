@@ -21,7 +21,7 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
         frags_rooted_num = int(frags_rooted)
         ncbi_taxon_id = int(ncbi_taxon_id)
 
-        if pc_frags_num  >= pct_threshold  or frags_rooted_num >= num_threshold or  name == 'Homo sapiens':
+        if (pc_frags_num  >= pct_threshold  and frags_rooted_num >= num_threshold) or  name == 'Homo sapiens':
             if 	rank_code == 'S':
                 result['Species'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
             if  rank_code == 'G':
@@ -29,7 +29,7 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
             if  rank_code == 'F':
                 result['Family'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
             if  ('Mycobact' in name) and (rank_code == 'G1'):
-                result['Genus1'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
+                result['Species complex'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
     return result
 
 def sort_result(result, pct_threshold, num_threshold):
@@ -54,19 +54,19 @@ def sort_result(result, pct_threshold, num_threshold):
     else:
         result['Genus'] = sorted(result['Genus'], key=lambda k: k['reads'], reverse=True)
 
-    if len(result['Genus1']) == 0:
-        result['Genus1'] = {
+    if len(result['Species complex']) == 0:
+        result['Species complex'] = {
             "mykrobe": False,
             "error": f'No Mycobacterium tuberculosis complex meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
-        result['Genus1'] = sorted(result['Genus1'], key=lambda k: k['reads'], reverse=True)
-        if result['Genus1'][0]['name'] == 'Mycobacterium tuberculosis complex':
-            result['Genus1'][0]['mykrobe'] = True
-            result['Genus1'][0]['notes'] = 'For higher-resolution classification, see Mykrobe report'
+        result['Species complex'] = sorted(result['Species complex'], key=lambda k: k['reads'], reverse=True)
+        if result['Species complex'][0]['name'] == 'Mycobacterium tuberculosis complex':
+            result['Species complex'][0]['mykrobe'] = True
+            result['Species complex'][0]['notes'] = 'For higher-resolution classification, see Mykrobe report.'
         else:
-            result['Genus1'][0]['mykrobe'] = False
-            result['Genus1'][0]['notes'] = 'Mixed or contaiminated sample. no further processing'       
+            result['Species complex'][0]['mykrobe'] = True
+            result['Species complex'][0]['notes'] = 'Sample is mixed or contaminated. Be cautious with further processing.'       
 
     return result
 

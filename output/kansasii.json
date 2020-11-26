@@ -51,7 +51,7 @@
             "taxon": 9606
         }
     ],
-    "Genus1": {
+    "Species complex": {
         "mykrobe": false,
         "error": "No Mycobacterium tuberculosis complex meet thresholds of > 100000 reads and > 1 % of total reads"
     }
