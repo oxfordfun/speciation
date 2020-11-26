@@ -1,7 +1,11 @@
 {
     "Thresholds": {
-        "Percentage": 1,
-        "Reads": 100000
+        "percentage": 1,
+        "reads": 100000
+    },
+    "Mykrobe": {
+        "report": true,
+        "notes": "Sample is mixed or contaminated. Be cautious with further processing."
     },
     "Family": [
         {
@@ -24,9 +28,7 @@
             "reads": 902443,
             "percentage": 87.97,
             "name": "Mycobacterium avium complex (MAC)",
-            "taxon": 120793,
-            "mykrobe": true,
-            "notes": "Sample is mixed or contaminated. Be cautious with further processing."
+            "taxon": 120793
         }
     ],
     "Species": [

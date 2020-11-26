@@ -11,7 +11,8 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
         lines = kraken2.readlines()
     
     result = defaultdict(list)
-    result['Thresholds'] = {'Percentage': pct_threshold, 'Reads': num_threshold}
+    result['Thresholds'] = {'percentage': pct_threshold, 'reads': num_threshold}
+    result['Mykrobe'] = {'report': False, 'notes': ''}
     
     for  line in lines:
         pc_frags, frags_rooted, _, rank_code, ncbi_taxon_id, name = line.split('\t')
@@ -30,43 +31,41 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
                 result['Family'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
             if  ('Mycobact' in name) and (rank_code == 'G1'):
                 result['Species complex'].append({'reads': frags_rooted_num, 'percentage': pc_frags_num, 'name': name, 'taxon': ncbi_taxon_id})
+                result['Mykrobe']['report']= True
     return result
 
 def sort_result(result, pct_threshold, num_threshold):
     if len(result['Family']) == 0: 
          result['Family'] = {
-            "error": f'No family classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No family classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
         result['Family'] = sorted(result['Family'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Species']) == 0: 
         result['Species'] = {
-            "error": f'No species classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No species classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
         result['Species'] = sorted(result['Species'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Genus']) == 0:
         result['Genus'] = {
-            "error": f'No genus classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No genus classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
         result['Genus'] = sorted(result['Genus'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Species complex']) == 0:
-        result['Species complex'] = {
-            "mykrobe": False,
-            "error": f'No Mycobacterium tuberculosis complex meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+        result['Species complex'] = {           
+            "notes": f'No Mycobacterium tuberculosis complex meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
         result['Species complex'] = sorted(result['Species complex'], key=lambda k: k['reads'], reverse=True)
         if result['Species complex'][0]['name'] == 'Mycobacterium tuberculosis complex':
-            result['Species complex'][0]['mykrobe'] = True
-            result['Species complex'][0]['notes'] = 'For higher-resolution classification, see Mykrobe report.'
+            result['Mykrobe']['notes'] = 'For higher-resolution classification, see Mykrobe report.'
         else:
-            result['Species complex'][0]['mykrobe'] = True
-            result['Species complex'][0]['notes'] = 'Sample is mixed or contaminated. Be cautious with further processing.'       
+            result['Mykrobe']['notes'] = 'Sample is mixed or contaminated. Be cautious with further processing.'       
 
     return result
 

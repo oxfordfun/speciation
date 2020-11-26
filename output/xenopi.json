@@ -1,7 +1,11 @@
 {
     "Thresholds": {
-        "Percentage": 1,
-        "Reads": 100000
+        "percentage": 1,
+        "reads": 100000
+    },
+    "Mykrobe": {
+        "report": false,
+        "notes": ""
     },
     "Family": [
         {
@@ -28,7 +32,6 @@
         }
     ],
     "Species complex": {
-        "mykrobe": false,
-        "error": "No Mycobacterium tuberculosis complex meet thresholds of > 100000 reads and > 1 % of total reads"
+        "notes": "No Mycobacterium tuberculosis complex meet thresholds of > 100000 reads and > 1 % of total reads"
     }
 }

@@ -1,7 +1,11 @@
 {
     "Thresholds": {
-        "Percentage": 1,
-        "Reads": 100000
+        "percentage": 1,
+        "reads": 100000
+    },
+    "Mykrobe": {
+        "report": true,
+        "notes": "For higher-resolution classification, see Mykrobe report."
     },
     "Family": [
         {
@@ -24,9 +28,7 @@
             "reads": 206978,
             "percentage": 11.62,
             "name": "Mycobacterium tuberculosis complex",
-            "taxon": 77643,
-            "mykrobe": true,
-            "notes": "For higher-resolution classification, see Mykrobe report."
+            "taxon": 77643
         }
     ],
     "Species": [
