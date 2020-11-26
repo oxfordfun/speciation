@@ -8,7 +8,7 @@ before_install:
  - pip install codecov 
 
 script:
- - coverage run test_-parse_kraken2.py 
+ - coverage run test-parse_kraken2.py 
 
 after_success:
  - codecov
