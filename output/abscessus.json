@@ -38,6 +38,6 @@
         }
     ],
     "Species complex": {
-        "notes": "No Mycobacterium tuberculosis complex meet thresholds of > 100000 reads and > 1 % of total reads"
+        "notes": "No Mycobacterium tuberculosis complex meets thresholds of > 100000 reads and > 1 % of total reads"
     }
 }
