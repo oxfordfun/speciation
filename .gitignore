@@ -1,3 +1,4 @@
 output.json
 .coverage
 htmlcov/
+__pycache__/
