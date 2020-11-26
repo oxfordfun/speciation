@@ -38,28 +38,28 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
 def sort_result(result, pct_threshold, num_threshold):
     if len(result['Family']) == 0: 
          result['Family'] = {
-            "notes": f'No family classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No family classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
         result['Family'] = sorted(result['Family'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Species']) == 0: 
         result['Species'] = {
-            "notes": f'No species classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No species classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
         result['Species'] = sorted(result['Species'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Genus']) == 0:
         result['Genus'] = {
-            "notes": f'No genus classification meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No genus classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
         result['Genus'] = sorted(result['Genus'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Species complex']) == 0:
         result['Species complex'] = {           
-            "notes": f'No Mycobacterium tuberculosis complex meet thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No Mycobacterium tuberculosis complex meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
         result['Species complex'] = sorted(result['Species complex'], key=lambda k: k['reads'], reverse=True)
