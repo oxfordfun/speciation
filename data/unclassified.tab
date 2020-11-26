@@ -1,0 +1,77 @@
+  0.48	21	21	U	0	unclassified
+ 99.52	4367	0	R	1	root
+ 99.52	4367	0	R1	131567	  cellular organisms
+ 99.52	4367	0	D	2	    Bacteria
+ 99.50	4366	0	D1	1783272	      Terrabacteria group
+ 99.50	4366	0	P	201174	        Actinobacteria
+ 99.50	4366	0	C	1760	          Actinobacteria
+ 99.50	4366	0	O	85007	            Corynebacteriales
+ 99.50	4366	2	F	1762	              Mycobacteriaceae
+ 99.45	4364	3262	G	1763	                Mycobacterium
+ 24.59	1079	463	G1	77643	                  Mycobacterium tuberculosis complex
+ 12.72	558	501	S	1773	                    Mycobacterium tuberculosis
+  0.16	7	7	S1	1352573	                      Mycobacterium tuberculosis PanR0601
+  0.09	4	2	S1	33894	                      Mycobacterium tuberculosis variant africanum
+  0.05	2	2	S2	572418	                        Mycobacterium tuberculosis variant africanum GM041182
+  0.09	4	4	S1	1306400	                      Mycobacterium tuberculosis str. Beijing/NITR203
+  0.09	4	3	S1	83332	                      Mycobacterium tuberculosis H37Rv
+  0.02	1	1	S2	757419	                        Mycobacterium tuberculosis H37RvCO
+  0.07	3	3	S1	1346776	                      Mycobacterium tuberculosis PanR0317
+  0.05	2	2	S1	1097669	                      Mycobacterium tuberculosis UT205
+  0.05	2	2	S1	882098	                      Mycobacterium tuberculosis S96-129
+  0.05	2	2	S1	1346786	                      Mycobacterium tuberculosis PanR0305
+  0.05	2	2	S1	1346781	                      Mycobacterium tuberculosis PanR0311
+  0.02	1	1	S1	1262529	                      Mycobacterium tuberculosis PanR1005
+  0.02	1	1	S1	1765	                      Mycobacterium tuberculosis variant bovis
+  0.02	1	1	S1	83331	                      Mycobacterium tuberculosis CDC1551
+  0.02	1	1	S1	1352575	                      Mycobacterium tuberculosis PanR0603
+  0.02	1	1	S1	1334052	                      Mycobacterium tuberculosis TRS6
+  0.02	1	1	S1	1334056	                      Mycobacterium tuberculosis TRS10
+  0.02	1	1	S1	1334058	                      Mycobacterium tuberculosis TRS12
+  0.02	1	1	S1	1334059	                      Mycobacterium tuberculosis TRS13
+  0.02	1	1	S1	1346787	                      Mycobacterium tuberculosis PanR0304
+  0.02	1	1	S1	1334068	                      Mycobacterium tuberculosis TRS22
+  0.02	1	1	S1	1346778	                      Mycobacterium tuberculosis PanR0315
+  0.02	1	1	S1	1334071	                      Mycobacterium tuberculosis TRS25
+  0.02	1	1	S1	1334072	                      Mycobacterium tuberculosis TRS26
+  0.02	1	1	S1	1334073	                      Mycobacterium tuberculosis TRS27
+  0.02	1	1	S1	1334074	                      Mycobacterium tuberculosis TRS28
+  0.02	1	1	S1	1346774	                      Mycobacterium tuberculosis PanR0402
+  0.02	1	1	S1	1334079	                      Mycobacterium tuberculosis 1821ADB38
+  0.02	1	1	S1	1346772	                      Mycobacterium tuberculosis PanR0404
+  0.02	1	1	S1	1346770	                      Mycobacterium tuberculosis PanR0407
+  0.02	1	1	S1	1344044	                      Mycobacterium tuberculosis PanR0205
+  0.02	1	1	S1	1352582	                      Mycobacterium tuberculosis PanR0611
+  0.02	1	1	S1	1352590	                      Mycobacterium tuberculosis PanR0805
+  0.02	1	1	S1	1352584	                      Mycobacterium tuberculosis PanR0703
+  0.02	1	1	S1	747367	                      Mycobacterium tuberculosis HN878
+  0.02	1	1	S1	1352585	                      Mycobacterium tuberculosis PanR0707
+  0.02	1	1	S1	1352600	                      Mycobacterium tuberculosis PanR1101
+  0.02	1	1	S1	1352589	                      Mycobacterium tuberculosis PanR0804
+  1.32	58	29	S	78331	                    Mycobacterium canettii
+  0.27	12	12	S1	1205674	                      Mycobacterium canettii CIPT 140070010
+  0.25	11	11	S1	1205677	                      Mycobacterium canettii CIPT 140070017
+  0.09	4	4	S1	1205675	                      Mycobacterium canettii CIPT 140070008
+  0.02	1	1	S1	1048245	                      Mycobacterium canettii CIPT 140010059
+  0.02	1	1	S1	1205676	                      Mycobacterium canettii CIPT 140060008
+  0.21	9	1	G1	120793	                  Mycobacterium avium complex (MAC)
+  0.07	3	3	S	1764	                    Mycobacterium avium
+  0.05	2	0	S	339268	                    Mycobacterium colombiense
+  0.05	2	2	S1	1041522	                      Mycobacterium colombiense CECT 3035
+  0.05	2	2	S	701042	                    Mycobacterium marseillense
+  0.02	1	1	S	222805	                    Mycobacterium chimaera
+  0.11	5	0	S	29311	                  Mycobacterium haemophilum
+  0.11	5	5	S1	1202450	                    Mycobacterium haemophilum DSM 44634
+  0.07	3	0	G1	2249310	                  Mycobacterium simiae complex
+  0.07	3	3	S	722731	                    Mycobacterium shigaense
+  0.05	2	2	S	1781	                  Mycobacterium marinum
+  0.05	2	2	S	2041046	                  Mycobacterium sp. 3/86Rv
+  0.02	1	1	S	1936029	                  Mycobacterium sp. MS1601
+  0.02	1	1	S	1768	                  Mycobacterium kansasii
+  0.02	1	0	P	1224	      Proteobacteria
+  0.02	1	0	C	28216	        Betaproteobacteria
+  0.02	1	0	O	80840	          Burkholderiales
+  0.02	1	0	O1	119065	            unclassified Burkholderiales
+  0.02	1	0	O2	224471	              Burkholderiales Genera incertae sedis
+  0.02	1	0	G	65047	                Mitsuaria
+  0.02	1	1	S	1658665	                  Mitsuaria sp. 7

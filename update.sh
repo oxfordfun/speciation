@@ -8,3 +8,4 @@ python parse_kraken2.py -k data/tb.tab -o output/tb.json
 python parse_kraken2.py -k data/mixed.tab -o output/mixed.json
 python parse_kraken2.py -k data/high.tab -o output/high.json
 python parse_kraken2.py -k data/low.tab -o output/low.json
+python parse_kraken2.py -k data/unclassified.tab -o output/unclassified.json

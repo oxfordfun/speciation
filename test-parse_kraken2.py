@@ -123,5 +123,19 @@ class TestParserKraken2(unittest.TestCase):
         self.assertTrue(sorted_result['Species'][2]['name'] == "Homo sapiens")
         self.assertTrue(sorted_result['Mykrobe']['report'] == True)
 
+    def test_sort_result_unclassified(self):
+        input_file = 'data/unclassified.tab'
+        pct_threshold = 1
+        num_threshold = 100000
+        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
+
+        self.assertTrue('notes' in sorted_result['Family'].keys())
+        self.assertTrue('notes' in sorted_result['Genus'].keys())
+        self.assertTrue('notes' in sorted_result['Species complex'].keys())
+        self.assertTrue('notes' in sorted_result['Species'].keys())
+        self.assertTrue(sorted_result['Mykrobe']['report'] == False)
+      
+
 if __name__ == "__main__":
     unittest.main()

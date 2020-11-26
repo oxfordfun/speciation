@@ -1,0 +1,22 @@
+{
+    "Thresholds": {
+        "percentage": 1,
+        "reads": 100000
+    },
+    "Mykrobe": {
+        "report": false,
+        "notes": ""
+    },
+    "Family": {
+        "notes": "No family classification meets thresholds of > 100000 reads and > 1 % of total reads"
+    },
+    "Species": {
+        "notes": "No species classification meets thresholds of > 100000 reads and > 1 % of total reads"
+    },
+    "Genus": {
+        "notes": "No genus classification meets thresholds of > 100000 reads and > 1 % of total reads"
+    },
+    "Species complex": {
+        "notes": "No Mycobacterium tuberculosis complex meets thresholds of > 100000 reads and > 1 % of total reads"
+    }
+}
