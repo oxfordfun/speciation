@@ -1,0 +1,14 @@
+language: python
+
+python:
+ - "3.7"
+
+before_install:
+ - pip install coverage
+ - pip install codecov 
+
+script:
+ - coverage run test_-parse_kraken2.py 
+
+after_success:
+ - codecov
