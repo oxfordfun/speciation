@@ -36,7 +36,7 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
 def sort_result(result, pct_threshold, num_threshold):
     if len(result['Family']) == 0: 
          result['Family'] = {
-            "notes": f'No family classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No family classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads.'
             }
     else:
         result['Family'] = sorted(result['Family'], key=lambda k: k['reads'], reverse=True)
@@ -45,7 +45,7 @@ def sort_result(result, pct_threshold, num_threshold):
 
     if len(result['Species']) == 0: 
         result['Species'] = {
-            "notes": f'No species classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No species classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads.'
             }
     else:
         result['Species'] = sorted(result['Species'], key=lambda k: k['reads'], reverse=True)
@@ -74,7 +74,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-k", "--kraken_file", help="kraken2 output file")
     parser.add_argument("-p", "--pct_reads", default=1, help="threshold of percentage of reads, default 1%")
-    parser.add_argument("-n", "--number_reads", default=100000, help="threshold of number of reads, default 100k")
+    parser.add_argument("-n", "--number_reads", default=10000, help="threshold of number of reads, default 10k")
     parser.add_argument("-o", "--output_file", default='output.json', help="output json file, default output.json")
     args = parser.parse_args()
 

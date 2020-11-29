@@ -1,7 +1,7 @@
 {
     "Thresholds": {
         "percentage": 1,
-        "reads": 100000
+        "reads": 10000
     },
     "Mykrobe": {
         "report": true,
@@ -49,6 +49,12 @@
             "percentage": 30.48,
             "name": "Paenibacillus glucanolyticus",
             "taxon": 59843
+        },
+        {
+            "reads": 52672,
+            "percentage": 4.26,
+            "name": "Mycobacterium tuberculosis",
+            "taxon": 1773
         },
         {
             "reads": 114,

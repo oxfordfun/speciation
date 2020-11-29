@@ -1,7 +1,7 @@
 {
     "Thresholds": {
         "percentage": 1,
-        "reads": 100000
+        "reads": 10000
     },
     "Mykrobe": {
         "report": true,
@@ -32,6 +32,12 @@
         }
     ],
     "Species": [
+        {
+            "reads": 80198,
+            "percentage": 4.5,
+            "name": "Mycobacterium tuberculosis",
+            "taxon": 1773
+        },
         {
             "reads": 549,
             "percentage": 0.03,

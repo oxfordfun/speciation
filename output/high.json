@@ -1,7 +1,7 @@
 {
     "Thresholds": {
         "percentage": 1,
-        "reads": 100000
+        "reads": 10000
     },
     "Mykrobe": {
         "report": true,
@@ -29,6 +29,12 @@
             "percentage": 87.97,
             "name": "Mycobacterium avium complex (MAC)",
             "taxon": 120793
+        },
+        {
+            "reads": 21383,
+            "percentage": 2.08,
+            "name": "Mycobacterium tuberculosis complex",
+            "taxon": 77643
         }
     ],
     "Species": [
