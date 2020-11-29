@@ -21,7 +21,7 @@ class TestParserKraken2(unittest.TestCase):
     def test_read_kraken2(self):
         input_file = 'data/tb.tab'
         pct_threshold = 1
-        num_threshold = 100000
+        num_threshold = 10000
         result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
         self.assertTrue('Family' in result.keys())
         self.assertTrue('Genus' in result.keys())
@@ -32,19 +32,20 @@ class TestParserKraken2(unittest.TestCase):
     def test_sort_result_tb(self):
         input_file = 'data/tb.tab'
         pct_threshold = 1
-        num_threshold = 100000
+        num_threshold = 10000
         result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
         self.assertTrue(sorted_result['Genus'][0]['name'] == "Mycobacterium")
         self.assertTrue(sorted_result['Species complex'][0]['name'] == "Mycobacterium tuberculosis complex")
-        self.assertTrue(sorted_result['Species'][0]['name'] == "Homo sapiens")
+        self.assertTrue(sorted_result['Species'][0]['name'] == "Mycobacterium tuberculosis") 
+        self.assertTrue(sorted_result['Species'][1]['name'] == "Homo sapiens")
         self.assertTrue(sorted_result['Mykrobe']['report'] == True)
     
     def test_sort_result_abscessus(self):
         input_file = 'data/abscessus.tab'
         pct_threshold = 1
-        num_threshold = 100000
+        num_threshold = 10000
         result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
@@ -57,7 +58,7 @@ class TestParserKraken2(unittest.TestCase):
     def test_sort_result_mixed(self):
         input_file = 'data/mixed.tab'
         pct_threshold = 1
-        num_threshold = 100000
+        num_threshold = 10000
         result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
@@ -66,18 +67,20 @@ class TestParserKraken2(unittest.TestCase):
         self.assertTrue(sorted_result['Genus'][1]['name'] == "Paenibacillus")
         self.assertTrue(sorted_result['Species complex'][0]['name'] == "Mycobacterium tuberculosis complex")
         self.assertTrue(sorted_result['Species'][0]['name'] == "Paenibacillus glucanolyticus")
-        self.assertTrue(sorted_result['Species'][1]['name'] == "Homo sapiens")
+        self.assertTrue(sorted_result['Species'][1]['name'] == "Mycobacterium tuberculosis")
+        self.assertTrue(sorted_result['Species'][2]['name'] == "Homo sapiens")
         self.assertTrue(sorted_result['Mykrobe']['report'] == True)
 
     def test_sort_result_high(self):
         input_file = 'data/high.tab'
         pct_threshold = 1
-        num_threshold = 100000
+        num_threshold = 10000
         result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
         self.assertTrue(sorted_result['Genus'][0]['name'] == "Mycobacterium")
         self.assertTrue(sorted_result['Species complex'][0]['name'] == "Mycobacterium avium complex (MAC)")
+        self.assertTrue(sorted_result['Species complex'][1]['name'] == "Mycobacterium tuberculosis complex")
         self.assertTrue(sorted_result['Species'][0]['name'] == "Mycobacterium avium")
         self.assertTrue(sorted_result['Species'][1]['name'] == "Homo sapiens")
         self.assertTrue(sorted_result['Mykrobe']['report'] == True)
@@ -85,32 +88,41 @@ class TestParserKraken2(unittest.TestCase):
     def test_sort_result_low(self):
         input_file = 'data/low.tab'
         pct_threshold = 1
-        num_threshold = 100000
+        num_threshold = 10000
         result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
         self.assertTrue(sorted_result['Genus'][0]['name'] == "Mycobacterium")
         self.assertTrue(sorted_result['Species complex'][0]['name'] == "Mycobacterium avium complex (MAC)")
+        self.assertTrue(sorted_result['Species complex'][1]['name'] == "Mycobacterium tuberculosis complex")
         self.assertTrue(sorted_result['Species'][0]['name'] == "Mycobacterium avium")
-        self.assertTrue(sorted_result['Species'][1]['name'] == "Homo sapiens")
+        self.assertTrue(sorted_result['Species'][1]['name'] == "Mycobacterium tuberculosis")
+        self.assertTrue(sorted_result['Species'][2]['name'] == "Homo sapiens")
         self.assertTrue(sorted_result['Mykrobe']['report'] == True)
 
     def test_sort_result_xenopi(self):
         input_file = 'data/xenopi.tab'
         pct_threshold = 1
-        num_threshold = 100000
+        num_threshold = 10000
         result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
+        self.assertTrue(sorted_result['Family'][1]['name'] == "Streptococcaceae")
+        self.assertTrue(sorted_result['Family'][2]['name'] == "Nocardiaceae")
         self.assertTrue(sorted_result['Genus'][0]['name'] == "Mycobacterium")
-        self.assertTrue('notes' in sorted_result['Species complex'].keys())
-        self.assertTrue(sorted_result['Species'][0]['name'] == "Homo sapiens")
+        self.assertTrue(sorted_result['Genus'][1]['name'] == "Streptococcus")
+        self.assertTrue(sorted_result['Genus'][2]['name'] == "Mycolicibacterium")
+        self.assertTrue(sorted_result['Species complex'][0]['name'] == 'Mycobacterium avium complex (MAC)')
+        self.assertTrue(sorted_result['Species complex'][1]['name'] == 'Mycobacterium simiae complex')
+        self.assertTrue(sorted_result['Species'][0]['name'] == "Streptococcus gordonii")
+        self.assertTrue(sorted_result['Species'][1]['name'] == "Mycobacterium avium")
+        self.assertTrue(sorted_result['Species'][2]['name'] == "Homo sapiens")
         self.assertTrue(sorted_result['Mykrobe']['report'] == True)
 
     def test_sort_result_kansasii(self):
         input_file = 'data/kansasii.tab'
         pct_threshold = 1
-        num_threshold = 100000
+        num_threshold = 10000
         result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Bacillaceae")
@@ -126,7 +138,7 @@ class TestParserKraken2(unittest.TestCase):
     def test_sort_result_unclassified(self):
         input_file = 'data/unclassified.tab'
         pct_threshold = 1
-        num_threshold = 100000
+        num_threshold = 10000
         result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
 
