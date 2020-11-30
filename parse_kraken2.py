@@ -50,6 +50,10 @@ def sort_result(result, pct_threshold, num_threshold):
             }
     else:
         result['Species'] = sorted(result['Species'], key=lambda k: k['reads'], reverse=True)
+        species = result['Species']
+        non_human_species = list(filter(lambda item: item['name'] != 'Homo sapiens', species))
+        if len(non_human_species) > 1:
+            result['Mykrobe']['species notes'] = f'sample is mixed or contaminated (contains reads from multiple non-human species)'
 
     if len(result['Genus']) == 0:
         result['Genus'] = {
