@@ -74,6 +74,10 @@ def sort_result(result, pct_threshold, num_threshold):
             result['Mykrobe']['report'] = True
             result['Mykrobe']['notes'] = f'For higher-resolution classification, see Mykrobe report.'
 
+    if isinstance(result['Family'], list) and len(result['Family']) > 0 and isinstance(result['Genus'], list) and len(result['Genus']) > 0 and isinstance(result['Species'], list) and len(result['Species']) > 0:
+        if 'Mycobact' in result['Family'][0]['name']  and ('Mycobact' not in result['Genus'][0]['name'] or 'Mycobact' not in result['Species'][0]['name']):
+            result['Mykrobe']['Mycobact notes'] = f'Top family classification is mycobacterial, but this is not consistent with top genus or species classifications.'
+
     return result
 
 if __name__ == '__main__':

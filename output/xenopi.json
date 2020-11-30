@@ -7,7 +7,8 @@
         "report": true,
         "notes": "For higher-resolution classification, see Mykrobe report.",
         "species notes": "Sample is mixed or contaminated (contains reads from multiple non-human species).",
-        "Species complex notes": "Sample contains multiple mycobacterial species complexes."
+        "Species complex notes": "Sample contains multiple mycobacterial species complexes.",
+        "Mycobact notes": "Top family classification is mycobacterial, but this is not consistent with top genus or species classifications."
     },
     "Family": [
         {
