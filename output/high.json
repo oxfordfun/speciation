@@ -5,7 +5,7 @@
     },
     "Mykrobe": {
         "report": true,
-        "notes": "Sample is mixed or contaminated. Be cautious with further processing."
+        "notes": "For higher-resolution classification, see Mykrobe report."
     },
     "Family": [
         {

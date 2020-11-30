@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Kraken2 output explained: https://github.com/DerrickWood/kraken2/wiki/Manual#output-formats. 
+# Kraken2 output explained: https://github.com/DerrickWood/kraken2/wiki/Manual#output-formats.
 
 import sys
 import json
@@ -9,11 +9,11 @@ from collections import defaultdict
 def read_kraken2(file_name, pct_threshold, num_threshold):
     with open(file_name) as kraken2:
         lines = kraken2.readlines()
-    
+
     result = defaultdict(list)
     result['Thresholds'] = {'percentage': pct_threshold, 'reads': num_threshold}
     result['Mykrobe'] = {'report': False, 'notes': ''}
-    
+
     for  line in lines:
         pc_frags, frags_rooted, _, rank_code, ncbi_taxon_id, name = line.split('\t')
         pc_frags = pc_frags.strip()
@@ -34,16 +34,17 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
     return result
 
 def sort_result(result, pct_threshold, num_threshold):
-    if len(result['Family']) == 0: 
+    if len(result['Family']) == 0:
          result['Family'] = {
             "notes": f'No family classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads.'
             }
     else:
         result['Family'] = sorted(result['Family'], key=lambda k: k['reads'], reverse=True)
-        if  (result['Family'][0]['name'] == 'Mycobacteriaceae'):
-                    result['Mykrobe']['report']= True
+        if  (result['Family'][0]['name'] == 'Mycobacteriaceae') and result['Family'][0]['reads'] >= 100000:
+            result['Mykrobe']['report'] = True
+            result['Mykrobe']['notes'] = f'For higher-resolution classification, see Mykrobe report.'
 
-    if len(result['Species']) == 0: 
+    if len(result['Species']) == 0:
         result['Species'] = {
             "notes": f'No species classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads.'
             }
@@ -58,15 +59,14 @@ def sort_result(result, pct_threshold, num_threshold):
         result['Genus'] = sorted(result['Genus'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Species complex']) == 0:
-        result['Species complex'] = {           
+        result['Species complex'] = {
             "notes": f'No Mycobacterium tuberculosis complex meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
             }
     else:
         result['Species complex'] = sorted(result['Species complex'], key=lambda k: k['reads'], reverse=True)
-        if result['Species complex'][0]['name'] == 'Mycobacterium tuberculosis complex':
-            result['Mykrobe']['notes'] = 'For higher-resolution classification, see Mykrobe report.'
-        else:
-            result['Mykrobe']['notes'] = 'Sample is mixed or contaminated. Be cautious with further processing.'       
+        if  (result['Species complex'][0]['name'] == 'Mycobacterium tuberculosis complex') and result['Species complex'][0]['reads'] >= 100000:
+            result['Mykrobe']['report'] = True
+            result['Mykrobe']['notes'] = f'For higher-resolution classification, see Mykrobe report.'
 
     return result
 
