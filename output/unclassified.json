@@ -14,9 +14,9 @@
         "notes": "No species classification meets thresholds of > 10000 reads and > 1 % of total reads."
     },
     "Genus": {
-        "notes": "No genus classification meets thresholds of > 10000 reads and > 1 % of total reads"
+        "notes": "No genus classification meets thresholds of > 10000 reads and > 1 % of total reads."
     },
     "Species complex": {
-        "notes": "No Mycobacterium tuberculosis complex meets thresholds of > 10000 reads and > 1 % of total reads"
+        "notes": "No Mycobacterium tuberculosis complex meets thresholds of > 10000 reads and > 1 % of total reads."
     }
 }

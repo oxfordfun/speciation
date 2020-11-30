@@ -6,7 +6,7 @@
     "Mykrobe": {
         "report": true,
         "notes": "For higher-resolution classification, see Mykrobe report.",
-        "species notes": "sample is mixed or contaminated (contains reads from multiple non-human species)",
+        "species notes": "Sample is mixed or contaminated (contains reads from multiple non-human species).",
         "Species complex notes": "Sample contains multiple mycobacterial species complexes."
     },
     "Family": [

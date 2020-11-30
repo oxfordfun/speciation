@@ -6,7 +6,7 @@
     "Mykrobe": {
         "report": false,
         "notes": "",
-        "species notes": "sample is mixed or contaminated (contains reads from multiple non-human species)"
+        "species notes": "Sample is mixed or contaminated (contains reads from multiple non-human species)."
     },
     "Family": [
         {
@@ -57,6 +57,6 @@
         }
     ],
     "Species complex": {
-        "notes": "No Mycobacterium tuberculosis complex meets thresholds of > 10000 reads and > 1 % of total reads"
+        "notes": "No Mycobacterium tuberculosis complex meets thresholds of > 10000 reads and > 1 % of total reads."
     }
 }

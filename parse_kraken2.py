@@ -53,18 +53,18 @@ def sort_result(result, pct_threshold, num_threshold):
         species = result['Species']
         non_human_species = list(filter(lambda item: item['name'] != 'Homo sapiens', species))
         if len(non_human_species) > 1:
-            result['Mykrobe']['species notes'] = f'sample is mixed or contaminated (contains reads from multiple non-human species)'
+            result['Mykrobe']['species notes'] = f'Sample is mixed or contaminated (contains reads from multiple non-human species).'
 
     if len(result['Genus']) == 0:
         result['Genus'] = {
-            "notes": f'No genus classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No genus classification meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads.'
             }
     else:
         result['Genus'] = sorted(result['Genus'], key=lambda k: k['reads'], reverse=True)
 
     if len(result['Species complex']) == 0:
         result['Species complex'] = {
-            "notes": f'No Mycobacterium tuberculosis complex meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads'
+            "notes": f'No Mycobacterium tuberculosis complex meets thresholds of > {num_threshold} reads and > {pct_threshold} % of total reads.'
             }
     else:
         result['Species complex'] = sorted(result['Species complex'], key=lambda k: k['reads'], reverse=True)
