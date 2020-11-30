@@ -68,6 +68,8 @@ def sort_result(result, pct_threshold, num_threshold):
             }
     else:
         result['Species complex'] = sorted(result['Species complex'], key=lambda k: k['reads'], reverse=True)
+        if len(result['Species complex']) > 1:
+            result['Mykrobe']['Species complex notes'] = f'Sample contains multiple mycobacterial species complexes.'
         if  (result['Species complex'][0]['name'] == 'Mycobacterium tuberculosis complex') and result['Species complex'][0]['reads'] >= 100000:
             result['Mykrobe']['report'] = True
             result['Mykrobe']['notes'] = f'For higher-resolution classification, see Mykrobe report.'

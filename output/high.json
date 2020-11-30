@@ -5,7 +5,8 @@
     },
     "Mykrobe": {
         "report": true,
-        "notes": "For higher-resolution classification, see Mykrobe report."
+        "notes": "For higher-resolution classification, see Mykrobe report.",
+        "Species complex notes": "Sample contains multiple mycobacterial species complexes."
     },
     "Family": [
         {
