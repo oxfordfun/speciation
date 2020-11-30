@@ -7,9 +7,9 @@ use JSON::Create qw(create_json);
 
 # REQUIREMENTS
 if ( (!(defined($ARGV[0]))) or (!(defined($ARGV[1]))) or (!(defined($ARGV[2]))) or (!(defined($ARGV[3]))) )
-	{ print "\n\nThis script will parse a Kraken output file to report (a) the dominant family/genus/species in the sample, and (b) any other contaminating species present.\n";
-	  print "We require a min. coverage of x% of the total reads AND a min. number of reads PER SPECIES. Set these to 0 to report everything.\n";
-	  print "USAGE:\tperl parse_kraken_report.pl [path to Kraken report] [path to output file; must end .json] [min. species coverage, as %] [min. species coverage, as no. of reads]\n";
+	{ print "\n\nThis script will parse a Kraken output file to report all family/genus/species classifications in the sample, plus species complex classifications if the dominant family is Mycobacteriaceae.\n";
+	  print "We require a min. coverage of x% of the total reads AND a min. number of reads PER CLASSIFICATION. Set these to 0 to report everything.\n";
+	  print "USAGE:\tperl parse_kraken_report.pl [path to Kraken report] [path to output file; must end .json] [min. coverage, as %] [min. coverage, as no. of reads]\n";
 	  print "E.G.:\tperl parse_kraken_report.pl report.tab out.txt 1 10000\n\n\n";
 	  exit 1;
 	}
@@ -30,6 +30,7 @@ if ($pct_threshold > 100)
 # READ KRAKEN REPORT
 # the Kraken report is assumed to be the standard format: 6 tab-delimited columns, with one line per taxon. This is described at https://github.com/DerrickWood/kraken2/wiki/Manual#output-formats. We will confirm this as we parse.
 my @S = (); my @G = (); my @G1 = (); my @F = ();
+my $non_human_species_detected = 0;
 open(IN,'<',$in_file) or die $!;
 while(<IN>)
 	{ my $line = $_; chomp($line);
@@ -45,68 +46,75 @@ while(<IN>)
 	  next if (($pc_frags 		  < $pct_threshold) and ($name ne 'Homo sapiens')); # skip classifications not supported by a min % of fragments
 	  next if (($num_frags_rooted < $num_threshold) and ($name ne 'Homo sapiens')); # skip classifications not supported by a min no. of fragments
 	  if (($pc_frags =~ /^\d+\.?\d*$/) and ($num_frags_rooted =~ /^\d+$/) and ($num_frags_direct =~ /^\d+$/) and ($rank_code =~ /^\w{1}\d*$/) and ($ncbi_taxon_id =~ /^\d+$/) and ($name =~ /\w+/))
-		{ if 	($rank_code eq 'S') { push(@S,[$num_frags_rooted,$pc_frags,$name,$ncbi_taxon_id]); }
+		{ if 	($rank_code eq 'S') { push(@S,[$num_frags_rooted,$pc_frags,$name,$ncbi_taxon_id]); $non_human_species_detected++ unless ($name eq 'Homo sapiens'); }
 		  elsif ($rank_code eq 'G') { push(@G,[$num_frags_rooted,$pc_frags,$name,$ncbi_taxon_id]); }
 		  elsif ($rank_code eq 'F') { push(@F,[$num_frags_rooted,$pc_frags,$name,$ncbi_taxon_id]); }
 		  if (($name =~ /^Mycobact.*?$/) and ($rank_code eq 'G1')) # Kraken does not resolve classifications among the Mycobacteriaceae as well as Mykrobe. At best, it can detect species complexes. We shall retain these classifications to look at later, as they may indicate whether this is a mixed-mycobacterial sample.
-			{ push(@G1,[$num_frags_rooted,$pc_frags,$name]); }
+			{ push(@G1,[$num_frags_rooted,$pc_frags,$name,$ncbi_taxon_id]); }
 		}
 	  else
 		{ die "ERROR: malformatted Kraken report, at line $. (\"$line\")\n"; }
 	}
 close(IN) or die $!;
-if ($#S == -1) { die "ERROR: no species classifications meet thresholds of > $num_threshold reads and > $pct_threshold % of total reads\n"; }
-if ($#G == -1) { die "ERROR: no genus classifications meet thresholds of > $num_threshold reads and > $pct_threshold % of total reads\n";   }
-if ($#F == -1) { die "ERROR: no family classifications meet thresholds of > $num_threshold reads and > $pct_threshold % of total reads\n";  }
-my @sorted_F = map { $_->[0] } sort { $b->[1] <=> $a->[1] } map { [$_, $_->[0]] } @F;
-my @sorted_G = map { $_->[0] } sort { $b->[1] <=> $a->[1] } map { [$_, $_->[0]] } @G;
-my @sorted_S = map { $_->[0] } sort { $b->[1] <=> $a->[1] } map { [$_, $_->[0]] } @S;
 
 # CREATE OUTPUT FILE
 open(OUT,'>',$out_file) or die $!;
 my %out = ();
-## dominant family/genus/species in the sample
 $out{'Thresholds'}{'reads'} = $num_threshold;
 $out{'Thresholds'}{'percentage'} = $pct_threshold;
-my $top_family = $sorted_F[0][2]; my $top_species = $sorted_S[0][2];
+if (($#S == -1) or ($non_human_species_detected == 0))
+	{ push(@{$out{'Warnings'}},"error: no species classifications meet thresholds of > $num_threshold reads and > $pct_threshold % of total reads (human excepted)"); }
+if ($#G == -1) { push(@{$out{'Warnings'}},"error: no genus classifications meet thresholds of > $num_threshold reads and > $pct_threshold % of total reads");   }
+if ($#F == -1) { push(@{$out{'Warnings'}},"error: no family classifications meet thresholds of > $num_threshold reads and > $pct_threshold % of total reads");  }
+my $top_family = ''; my $top_genus = ''; my $top_species = '';
+my $contaminant_species_found = 0;
 for(my $x=0;$x<=2;$x++)
-	{ my @sorted_arr = (); my $clade = '';
-	  if    ($x == 0) { @sorted_arr = @sorted_F; $clade = 'Family';  }
-	  elsif ($x == 1) { @sorted_arr = @sorted_G; $clade = 'Genus';   }
-	  elsif ($x == 2) { @sorted_arr = @sorted_S; $clade = 'Species'; }
-	  my %hash = ('reads' => $sorted_arr[0][0], 'percentage' => $sorted_arr[0][1], 'name' => $sorted_arr[0][2], 'taxon_id' => $sorted_arr[0][3]);
-	  push(@{$out{$clade}},\%hash);
-	}
-## other species in the sample
-my $warning = 0;
-for(my $x=0;$x<@sorted_S;$x++)
-	{ next if ($sorted_S[$x][2] eq $top_species);
-	  my %hash = ('reads' => $sorted_S[$x][0], 'percentage' => $sorted_S[$x][1], 'name' => $sorted_S[$x][2], 'taxon_id' => $sorted_S[$x][3]);
-	  push(@{$out{'Species'}},\%hash);
-	  if ($sorted_S[$x][2] ne 'Homo sapiens')
-		{ push(@{$out{'Warnings'}},'error: contains non-human contaminant');
-		  $warning++;
+	{ my @arr = (); my $clade = '';
+	  if    ($x == 0) { @arr = @F; $clade = 'Family';  }
+	  elsif ($x == 1) { @arr = @G; $clade = 'Genus';   }
+	  elsif ($x == 2) { @arr = @S; $clade = 'Species'; }
+	  next if ($#arr == -1);
+	  my @sorted_arr = map { $_->[0] } sort { $b->[1] <=> $a->[1] } map { [$_, $_->[0]] } @arr;
+	  if 	($x == 0) { $top_family  = $sorted_arr[0][2]; }
+	  elsif ($x == 1) { $top_genus   = $sorted_arr[0][2]; }
+	  elsif ($x == 2) { $top_species = $sorted_arr[0][2]; }
+	  for(my $y=0;$y<@sorted_arr;$y++)
+		{ my %hash = ('reads' => $sorted_arr[$y][0], 'percentage' => $sorted_arr[$y][1], 'name' => $sorted_arr[$y][2], 'taxon_id' => $sorted_arr[$y][3]);
+		  push(@{$out{$clade}},\%hash);
+		  if (($x == 2) and ($y > 0) and ($sorted_arr[$y][2] ne 'Homo sapiens'))
+			{ $contaminant_species_found++; } # raise a warning if a non-human species is detected that is NOT the top hit, as this indicates the sample is mixed or contaminated
 		}
+	}
+if ($contaminant_species_found > 0)
+	{ push(@{$out{'Warnings'}},'error: sample is mixed or contaminated (contains reads from multiple non-human species)'); }
+my $is_consistently_mycobacterial = 0;
+if ($top_family =~ /^Mycobact.*?$/)
+	{ if (($top_genus !~ /^Mycobact.*?$/) or ($top_species !~ /^Mycobact.*?$/))
+		{ push(@{$out{'Warnings'}},'error: top family classification is mycobacterial, but this is not consistent with top genus and species classifications'); }
+	  elsif (($top_genus =~ /^Mycobact.*?$/) and ($top_species =~ /^Mycobact.*?$/))
+		{ $is_consistently_mycobacterial++; }
 	}
 
-# IF THE TOP FAMILY HIT IS MYCOBACTERIACEAE, WE WILL ALSO REPORT THE KRAKEN 'G1' CLASSIFICATIONS. THESE MAY INDICATE WHETHER THIS IS A MIXED MYCOBACTERIAL SAMPLE.
-if ($top_family eq 'Mycobacteriaceae')
+# IF THE TOP FAMILY, GENUS, AND SPECIES HITS ARE MYCOBACTERIAL, WE WILL ALSO REPORT THE KRAKEN 'G1' CLASSIFICATIONS. THESE MAY INDICATE WHETHER THIS IS A MIXED MYCOBACTERIAL SAMPLE.
+if (($top_family eq 'Mycobacteriaceae') and ($is_consistently_mycobacterial > 0))
 	{ $out{'Mykrobe'} = 'True'; # we recommend the user invoke Mykrobe for higher-resolution classification
-	  my @sorted_G1 = map { $_->[0] } sort { $b->[1] <=> $a->[1] } map { [$_, $_->[0]] } @G1;
-	  for(my $x=0;$x<@sorted_G1;$x++)
-		{ my %hash = ('reads' => $sorted_G1[$x][0], 'percentage' => $sorted_G1[$x][1], 'name' => $sorted_G1[$x][2], 'taxon_id' => $sorted_G1[$x][3]);
-		  push(@{$out{'Species complex'}},\%hash);
-		}
-	  my $num_G1 = @sorted_G1;
-	  if ($num_G1 > 1)
-		{ push(@{$out{'Warnings'}},'error: mixed mycobacterial sample');
-		  $warning++;
+	  if ($#G1 == -1)
+		{ push(@{$out{'Warnings'}},"error: no species complex classifications meet thresholds of > $num_threshold reads and > $pct_threshold % of total reads"); }
+	  else
+		{ my @sorted_G1 = map { $_->[0] } sort { $b->[1] <=> $a->[1] } map { [$_, $_->[0]] } @G1;
+		  for(my $x=0;$x<@sorted_G1;$x++)
+			{ my %hash = ('reads' => $sorted_G1[$x][0], 'percentage' => $sorted_G1[$x][1], 'name' => $sorted_G1[$x][2], 'taxon_id' => $sorted_G1[$x][3]);
+			  push(@{$out{'Species complex'}},\%hash);
+			}
+		  my $num_G1 = @sorted_G1;
+		  if ($num_G1 > 1)
+			{ push(@{$out{'Warnings'}},'error: sample contains multiple mycobacterial species complexes'); }
 		}
 	}
 else
 	{ $out{'Mykrobe'} = 'False';
 	}
-if ($warning == 0)
+if (!(exists($out{'Warnings'})))
 	{ push(@{$out{'Warnings'}},'');
 	}
 my $json = create_json(\%out);
