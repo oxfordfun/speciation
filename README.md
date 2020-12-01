@@ -33,12 +33,12 @@ We used following test cases.
 
 3. low (avium) - Sample is a mixture of reads with different S classifications: both M. avium (c. 20%) and M. tuberculosis (c. 8%).
 * Warnings raised: sample is mixed-mycobacterial; sample contains reads from multiple species.
-* Failure at Kraken: no.
+* Failure at Kraken: yes.
 * Call Mykrobe: no.
 
 4. mixed - Sample is M. tuberculosis contaminated with c. 30% Paenibacillus glucanolyticus.
 * Warnings raised: sample contains reads from multiple species; top family classification is mycobacterial but this is not consistent with top genus or species classifications.
-* Failure at Kraken: no.
+* Failure at Kraken: yes.
 * Call Mykrobe: no.
 
 5. abscessus - Sample is a single isolate of Mycobacteroides abscessus.
@@ -48,7 +48,7 @@ We used following test cases.
 
 6. xenopi - Sample is a mixture of reads from 2 mycobacterial species complexes (M. avium and M. simiae), contaminated with Streptococcus gordonii.
 * Warnings raised: sample is mixed-mycobacterial; sample contains reads from multiple species; top family classification is mycobacterial but this is not consistent with top genus or species classifications.
-* Failure at Kraken: no.
+* Failure at Kraken: yes.
 * Call Mykrobe: no.
 
 7. kansasii - Sample is non-tuberculosis mycobacteria (M. kansasii) contaminated with c. 70% Bacillus paralicheniformis.
