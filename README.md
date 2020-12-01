@@ -34,12 +34,12 @@ We used following test cases.
 3. low (avium) - Sample is a mixture of reads with different S classifications: both M. avium (c. 20%) and M. tuberculosis (c. 8%).
 * Warnings raised: sample is mixed-mycobacterial; sample contains reads from multiple species.
 * Failure at Kraken: no.
-* Call Mykrobe: yes.
+* Call Mykrobe: no.
 
 4. mixed - Sample is M. tuberculosis contaminated with c. 30% Paenibacillus glucanolyticus.
 * Warnings raised: sample contains reads from multiple species; top family classification is mycobacterial but this is not consistent with top genus or species classifications.
 * Failure at Kraken: no.
-* Call Mykrobe: yes.
+* Call Mykrobe: no.
 
 5. abscessus - Sample is a single isolate of Mycobacteroides abscessus.
 * Warnings raised: no species complex classifications meet thresholds of > 10,000 reads and > 1% of total reads (note that this warning can be ignored: there is no associated G1 clade for Mycobacteroides abscessus).
@@ -49,7 +49,7 @@ We used following test cases.
 6. xenopi - Sample is a mixture of reads from 2 mycobacterial species complexes (M. avium and M. simiae), contaminated with Streptococcus gordonii.
 * Warnings raised: sample is mixed-mycobacterial; sample contains reads from multiple species; top family classification is mycobacterial but this is not consistent with top genus or species classifications.
 * Failure at Kraken: no.
-* Call Mykrobe: yes.
+* Call Mykrobe: no.
 
 7. kansasii - Sample is non-tuberculosis mycobacteria (M. kansasii) contaminated with c. 70% Bacillus paralicheniformis.
 * Warnings raised: sample contains reads from multiple species.
@@ -67,10 +67,10 @@ We used following test cases.
 |-------------|----------------------------------------------------|------------------------------------------------|--------------------------------------------------------------------------------|----------------------------------------------------------------------|---------|----------------------|-----------------------|------------------------|-------------|
 |tb           |Mycobacteriaceae                                    |Mycobacterium                                   | Mycobacterium tuberculosis complex                                             | Mycobacterium tuberculosis, Homo sapiens                             | True    |                      |                       |                        | tb          |
 |high(avium)  |Mycobacteriaceae                                    |Mycobacterium                                   | Mycobacterium avium complex (MAC), Mycobacterium tuberculosis complex          | Mycobacterium avium, Homo sapiens                                    | True    |                      | True                  |                        | high(avium) |
-|low (avium)  |Mycobacteriaceae                                    |Mycobacterium                                   | Mycobacterium avium complex (MAC), Mycobacterium tuberculosis complex          | Mycobacterium avium, Mycobacterium tuberculosis,Homo sapiens         | True    | True                 | True                  |                        | low(avium)  |
-|mixed        |Mycobacteriaceae,Paenibacillaceae                   |Mycobacterium, Paenibacillus                    | Mycobacterium tuberculosis complex                                             | Paenibacillus glucanolyticus, Mycobacterium tuberculosis,Homo sapiens| True    | True                 |                       | True                   | mixed       |
+|low (avium)  |Mycobacteriaceae                                    |Mycobacterium                                   | Mycobacterium avium complex (MAC), Mycobacterium tuberculosis complex          | Mycobacterium avium, Mycobacterium tuberculosis,Homo sapiens         | False   | True                 | True                  |                        | low(avium)  |
+|mixed        |Mycobacteriaceae,Paenibacillaceae                   |Mycobacterium, Paenibacillus                    | Mycobacterium tuberculosis complex                                             | Paenibacillus glucanolyticus, Mycobacterium tuberculosis,Homo sapiens| False   | True                 |                       | True                   | mixed       |
 |abscessus    |Mycobacteriaceae                                    |Mycobacteroides                                 | N/A                                                                            | Mycobacteroides abscessus, Homo sapiens                              | True    |                      |                       |                        | abscessus   |
-|xenopi       |Mycobacteriaceae, Streptococcaceae, Nocardiaceae    |Mycobacterium, Nocardiaceae, Mycolicibacterium  | Mycobacterium avium complex (MAC), Mycobacterium simiae complex                | Streptococcus gordonii, Mycobacterium avium, Homo sapiens            | True    | True                 | True                  | True                   | xenopi      |
+|xenopi       |Mycobacteriaceae, Streptococcaceae, Nocardiaceae    |Mycobacterium, Nocardiaceae, Mycolicibacterium  | Mycobacterium avium complex (MAC), Mycobacterium simiae complex                | Streptococcus gordonii, Mycobacterium avium, Homo sapiens            | False   | True                 | True                  | True                   | xenopi      |
 |kansasii     |Bacillaceae,Mycobacteriaceae                        |Bacillus, Mycobacterium                         | N/A                                                                            | Bacillus paralicheniformis, Mycobacterium kansasii, Homo sapiens     | False   | True                 |                       |                        | kansasii    |
 |unclassified |N/A                                                 |N/A                                             | N/A                                                                            | N/A                                                                  | False   |                      |                       |                        | unclassified|   
 

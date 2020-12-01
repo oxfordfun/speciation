@@ -69,7 +69,7 @@ class TestParserKraken2(unittest.TestCase):
         self.assertTrue(sorted_result['Species'][0]['name'] == "Paenibacillus glucanolyticus")
         self.assertTrue(sorted_result['Species'][1]['name'] == "Mycobacterium tuberculosis")
         self.assertTrue(sorted_result['Species'][2]['name'] == "Homo sapiens")
-        self.assertTrue(sorted_result['Mykrobe']['report'] == True)
+        self.assertTrue(sorted_result['Mykrobe']['report'] == False)
 
     def test_sort_result_high(self):
         input_file = 'data/high.tab'
@@ -98,7 +98,7 @@ class TestParserKraken2(unittest.TestCase):
         self.assertTrue(sorted_result['Species'][0]['name'] == "Mycobacterium avium")
         self.assertTrue(sorted_result['Species'][1]['name'] == "Mycobacterium tuberculosis")
         self.assertTrue(sorted_result['Species'][2]['name'] == "Homo sapiens")
-        self.assertTrue(sorted_result['Mykrobe']['report'] == True)
+        self.assertTrue(sorted_result['Mykrobe']['report'] == False)
 
     def test_sort_result_xenopi(self):
         input_file = 'data/xenopi.tab'
@@ -117,7 +117,7 @@ class TestParserKraken2(unittest.TestCase):
         self.assertTrue(sorted_result['Species'][0]['name'] == "Streptococcus gordonii")
         self.assertTrue(sorted_result['Species'][1]['name'] == "Mycobacterium avium")
         self.assertTrue(sorted_result['Species'][2]['name'] == "Homo sapiens")
-        self.assertTrue(sorted_result['Mykrobe']['report'] == True)
+        self.assertTrue(sorted_result['Mykrobe']['report'] == False)
 
     def test_sort_result_kansasii(self):
         input_file = 'data/kansasii.tab'
