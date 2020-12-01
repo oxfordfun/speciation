@@ -5,7 +5,7 @@
     },
     "Mykrobe": {
         "report": false,
-        "notes": "",
+        "notes": "No Mykrobe Report",
         "species notes": "Sample is mixed or contaminated (contains reads from multiple non-human species)."
     },
     "Family": [

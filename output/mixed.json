@@ -5,7 +5,7 @@
     },
     "Mykrobe": {
         "report": false,
-        "notes": "For higher-resolution classification, see Mykrobe report.",
+        "notes": "No Mykrobe Report",
         "species notes": "Sample is mixed or contaminated (contains reads from multiple non-human species).",
         "Mycobact notes": "Top family classification is mycobacterial, but this is not consistent with top genus or species classifications."
     },

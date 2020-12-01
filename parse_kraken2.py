@@ -12,7 +12,7 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
 
     result = defaultdict(list)
     result['Thresholds'] = {'percentage': pct_threshold, 'reads': num_threshold}
-    result['Mykrobe'] = {'report': False, 'notes': ''}
+    result['Mykrobe'] = {'report': False, 'notes': 'No Mykrobe Report'}
 
     for  line in lines:
         pc_frags, frags_rooted, _, rank_code, ncbi_taxon_id, name = line.split('\t')
@@ -42,7 +42,6 @@ def sort_result(result, pct_threshold, num_threshold):
         result['Family'] = sorted(result['Family'], key=lambda k: k['reads'], reverse=True)
         if  (result['Family'][0]['name'] == 'Mycobacteriaceae') and result['Family'][0]['reads'] >= 100000:
             result['Mykrobe']['report'] = True
-            result['Mykrobe']['notes'] = f'For higher-resolution classification, see Mykrobe report.'
 
     if len(result['Species']) == 0:
         result['Species'] = {
@@ -72,7 +71,6 @@ def sort_result(result, pct_threshold, num_threshold):
             result['Mykrobe']['Species complex notes'] = f'Sample contains multiple mycobacterial species complexes.'
         if  (result['Species complex'][0]['name'] == 'Mycobacterium tuberculosis complex') and result['Species complex'][0]['reads'] >= 100000:
             result['Mykrobe']['report'] = True
-            result['Mykrobe']['notes'] = f'For higher-resolution classification, see Mykrobe report.'
 
     if isinstance(result['Family'], list) and len(result['Family']) > 0 and isinstance(result['Genus'], list) and len(result['Genus']) > 0 and isinstance(result['Species'], list) and len(result['Species']) > 0:
         if 'Mycobact' in result['Family'][0]['name']  and ('Mycobact' not in result['Genus'][0]['name'] or 'Mycobact' not in result['Species'][0]['name']):
@@ -80,6 +78,9 @@ def sort_result(result, pct_threshold, num_threshold):
 
     if ('Mycobact notes' in result['Mykrobe'].keys()) or ('species notes' in result['Mykrobe'].keys()):
         result['Mykrobe']['report'] = False
+
+    if (result['Mykrobe']['report'] == True):
+        result['Mykrobe']['notes'] = f'For higher-resolution classification, see Mykrobe report.'
 
     return result
 

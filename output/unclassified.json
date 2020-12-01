@@ -5,7 +5,7 @@
     },
     "Mykrobe": {
         "report": false,
-        "notes": ""
+        "notes": "No Mykrobe Report"
     },
     "Family": {
         "notes": "No family classification meets thresholds of > 10000 reads and > 1 % of total reads."
