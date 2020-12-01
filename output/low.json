@@ -3,8 +3,8 @@
         "percentage": 1,
         "reads": 10000
     },
-    "Mykrobe": {
-        "report": false,
+    "Warnings": {
+        "mykrobe": false,
         "notes": "No Mykrobe Report",
         "species notes": "Sample is mixed or contaminated (contains reads from multiple non-human species).",
         "Species complex notes": "Sample contains multiple mycobacterial species complexes."

@@ -12,7 +12,7 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
 
     result = defaultdict(list)
     result['Thresholds'] = {'percentage': pct_threshold, 'reads': num_threshold}
-    result['Mykrobe'] = {'report': False, 'notes': 'No Mykrobe Report'}
+    result['Warnings'] = {'mykrobe': False, 'notes': 'No Mykrobe Report'}
 
     for  line in lines:
         pc_frags, frags_rooted, _, rank_code, ncbi_taxon_id, name = line.split('\t')
@@ -41,7 +41,7 @@ def sort_result(result, pct_threshold, num_threshold):
     else:
         result['Family'] = sorted(result['Family'], key=lambda k: k['reads'], reverse=True)
         if  (result['Family'][0]['name'] == 'Mycobacteriaceae') and result['Family'][0]['reads'] >= 100000:
-            result['Mykrobe']['report'] = True
+            result['Warnings']['mykrobe'] = True
 
     if len(result['Species']) == 0:
         result['Species'] = {
@@ -52,7 +52,7 @@ def sort_result(result, pct_threshold, num_threshold):
         species = result['Species']
         non_human_species = list(filter(lambda item: item['name'] != 'Homo sapiens', species))
         if len(non_human_species) > 1:
-            result['Mykrobe']['species notes'] = f'Sample is mixed or contaminated (contains reads from multiple non-human species).'
+            result['Warnings']['species notes'] = f'Sample is mixed or contaminated (contains reads from multiple non-human species).'
 
     if len(result['Genus']) == 0:
         result['Genus'] = {
@@ -68,19 +68,19 @@ def sort_result(result, pct_threshold, num_threshold):
     else:
         result['Species complex'] = sorted(result['Species complex'], key=lambda k: k['reads'], reverse=True)
         if len(result['Species complex']) > 1:
-            result['Mykrobe']['Species complex notes'] = f'Sample contains multiple mycobacterial species complexes.'
+            result['Warnings']['Species complex notes'] = f'Sample contains multiple mycobacterial species complexes.'
         if  (result['Species complex'][0]['name'] == 'Mycobacterium tuberculosis complex') and result['Species complex'][0]['reads'] >= 100000:
-            result['Mykrobe']['report'] = True
+            result['Warnings']['mykrobe'] = True
 
     if isinstance(result['Family'], list) and len(result['Family']) > 0 and isinstance(result['Genus'], list) and len(result['Genus']) > 0 and isinstance(result['Species'], list) and len(result['Species']) > 0:
         if 'Mycobact' in result['Family'][0]['name']  and ('Mycobact' not in result['Genus'][0]['name'] or 'Mycobact' not in result['Species'][0]['name']):
-            result['Mykrobe']['Mycobact notes'] = f'Top family classification is mycobacterial, but this is not consistent with top genus or species classifications.'
+            result['Warnings']['Mycobact notes'] = f'Top family classification is mycobacterial, but this is not consistent with top genus or species classifications.'
 
-    if ('Mycobact notes' in result['Mykrobe'].keys()) or ('species notes' in result['Mykrobe'].keys()):
-        result['Mykrobe']['report'] = False
+    if ('Mycobact notes' in result['Warnings'].keys()) or ('species notes' in result['Warnings'].keys()):
+        result['Warnings']['mykrobe'] = False
 
-    if (result['Mykrobe']['report'] == True):
-        result['Mykrobe']['notes'] = f'For higher-resolution classification, see Mykrobe report.'
+    if (result['Warnings']['mykrobe'] == True):
+        result['Warnings']['notes'] = f'For higher-resolution classification, see Mykrobe report.'
 
     return result
 

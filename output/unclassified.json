@@ -3,8 +3,8 @@
         "percentage": 1,
         "reads": 10000
     },
-    "Mykrobe": {
-        "report": false,
+    "Warnings": {
+        "mykrobe": false,
         "notes": "No Mykrobe Report"
     },
     "Family": {

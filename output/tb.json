@@ -3,8 +3,8 @@
         "percentage": 1,
         "reads": 10000
     },
-    "Mykrobe": {
-        "report": true,
+    "Warnings": {
+        "mykrobe": true,
         "notes": "For higher-resolution classification, see Mykrobe report."
     },
     "Family": [
