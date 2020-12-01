@@ -95,8 +95,8 @@ if ($top_family =~ /^Mycobact.*?$/)
 		{ $is_consistently_mycobacterial++; }
 	}
 
-# IF THE TOP FAMILY, GENUS, AND SPECIES HITS ARE MYCOBACTERIAL, WE WILL ALSO REPORT THE KRAKEN 'G1' CLASSIFICATIONS. THESE MAY INDICATE WHETHER THIS IS A MIXED MYCOBACTERIAL SAMPLE.
-if (($top_family eq 'Mycobacteriaceae') and ($is_consistently_mycobacterial > 0))
+# IF THE TOP FAMILY, GENUS, AND SPECIES HITS ARE MYCOBACTERIAL (WHICH CAN ONLY BE THE CASE IF MINIMUM COVERAGE THRESHOLDS ARE MET) AND THERE ARE NO CONTAMINANTS, WE WILL ALSO REPORT THE KRAKEN 'G1' CLASSIFICATIONS. THESE MAY INDICATE WHETHER THIS IS A MIXED MYCOBACTERIAL SAMPLE.
+if (($top_family eq 'Mycobacteriaceae') and ($is_consistently_mycobacterial > 0) and ($contaminant_species_found == 0))
 	{ $out{'Mykrobe'} = 'True'; # we recommend the user invoke Mykrobe for higher-resolution classification
 	  if ($#G1 == -1)
 		{ push(@{$out{'Warnings'}},"error: no species complex classifications meet thresholds of > $num_threshold reads and > $pct_threshold % of total reads"); }
