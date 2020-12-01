@@ -12,7 +12,7 @@ def read_kraken2(file_name, pct_threshold, num_threshold):
 
     result = defaultdict(list)
     result['Thresholds'] = {'percentage': pct_threshold, 'reads': num_threshold}
-    result['Warnings'] = {'mykrobe': False, 'notes': 'No Mykrobe Report'}
+    result['Warnings'] = {'mykrobe': False, 'notes': 'No mykrobe report'}
 
     for  line in lines:
         pc_frags, frags_rooted, _, rank_code, ncbi_taxon_id, name = line.split('\t')
@@ -74,7 +74,7 @@ def sort_result(result, pct_threshold, num_threshold):
 
     if isinstance(result['Family'], list) and len(result['Family']) > 0 and isinstance(result['Genus'], list) and len(result['Genus']) > 0 and isinstance(result['Species'], list) and len(result['Species']) > 0:
         if 'Mycobact' in result['Family'][0]['name']  and ('Mycobact' not in result['Genus'][0]['name'] or 'Mycobact' not in result['Species'][0]['name']):
-            result['Warnings']['Mycobact notes'] = f'Top family classification is mycobacterial, but this is not consistent with top genus or species classifications.'
+            result['Warnings']['mycobact notes'] = f'Top family classification is mycobacterial, but this is not consistent with top genus or species classifications.'
 
     if ('Mycobact notes' in result['Warnings'].keys()) or ('species notes' in result['Warnings'].keys()):
         result['Warnings']['mykrobe'] = False
