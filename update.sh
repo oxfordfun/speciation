@@ -9,3 +9,7 @@
 ./parse_kraken2.py -k data/high.tab -o output/high.json
 ./parse_kraken2.py -k data/low.tab -o output/low.json
 ./parse_kraken2.py -k data/unclassified.tab -o output/unclassified.json
+
+./parse_mykrobe.py -m data/mykrobe1.json -o output/mykrobe1.json
+./parse_mykrobe.py -m data/mykrobe2.json -o output/mykrobe2.json
+./parse_mykrobe.py -m data/mykrobe3.json -o output/mykrobe3.json

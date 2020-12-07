@@ -9,6 +9,7 @@ before_install:
 
 script:
  - coverage run test-parse_kraken2.py 
-
+ - coverage run test-parse_mykrobe.py
+ 
 after_success:
  - codecov
