@@ -13,6 +13,7 @@ def report_species(mykrobe_data):
     result['sub_complex'] = data['sub_complex']
     result['species'] = data['species']
     lineages = data['lineage']['lineage']
+    result['lineage'] = lineages[0]
     r_lineages = dict()
     for lineage in lineages:
         l_calls = data['lineage']['calls'][lineage]

@@ -35,6 +35,7 @@ class TestParserMykrobe(unittest.TestCase):
         input_data = read_file(input_file)
        
         result = parse_mykrobe.report_species(input_data)
+        self.assertEqual(result['lineage'],'lineage3')
         result_lineages = result['lineages']
         self.assertTrue('lineage3' in result_lineages.keys())
         result_mutations = result_lineages['lineage3']
@@ -45,6 +46,7 @@ class TestParserMykrobe(unittest.TestCase):
         input_data = read_file(input_file)
        
         result = parse_mykrobe.report_species(input_data)
+        self.assertEqual(result['lineage'],'lineage1.1.2')
         result_lineages = result['lineages']
 
         self.assertTrue('lineage1' in result_lineages.keys())
@@ -64,6 +66,7 @@ class TestParserMykrobe(unittest.TestCase):
         input_data = read_file(input_file)
        
         result = parse_mykrobe.report_species(input_data)
+        self.assertEqual(result['lineage'],'lineage2.2.5')
         result_lineages = result['lineages']
 
         self.assertTrue('lineage2' in result_lineages.keys())

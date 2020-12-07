@@ -17,6 +17,7 @@
             "median_depth": 63.0
         }
     },
+    "lineage": "lineage1.1.2",
     "lineages": {
         "lineage1": {
             "G615938A": {
