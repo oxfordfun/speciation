@@ -10,6 +10,10 @@ import json
 
 import parse_kraken2
 
+def read_file(input):
+    with open(input) as f:
+        return f.read()
+
 class TestParserKraken2(unittest.TestCase):
     def setUp(self):
         pass
@@ -18,11 +22,13 @@ class TestParserKraken2(unittest.TestCase):
     def tearDownClass(cls):
         pass
 
+
     def test_read_kraken2(self):
         input_file = 'data/tb.tab'
+        input_data = read_file(input_file)
         pct_threshold = 1
         num_threshold = 10000
-        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        result = parse_kraken2.read_kraken2(input_data, pct_threshold, num_threshold)
         self.assertTrue('Family' in result.keys())
         self.assertTrue('Genus' in result.keys())
         self.assertTrue('Species complex' in result.keys())
@@ -31,9 +37,10 @@ class TestParserKraken2(unittest.TestCase):
     
     def test_sort_result_tb(self):
         input_file = 'data/tb.tab'
+        input_data = read_file(input_file)
         pct_threshold = 1
         num_threshold = 10000
-        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        result = parse_kraken2.read_kraken2(input_data, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
         self.assertTrue(sorted_result['Genus'][0]['name'] == "Mycobacterium")
@@ -44,9 +51,10 @@ class TestParserKraken2(unittest.TestCase):
     
     def test_sort_result_abscessus(self):
         input_file = 'data/abscessus.tab'
+        input_data = read_file(input_file)
         pct_threshold = 1
         num_threshold = 10000
-        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        result = parse_kraken2.read_kraken2(input_data, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
         self.assertTrue(sorted_result['Genus'][0]['name'] == "Mycobacteroides")
@@ -57,9 +65,10 @@ class TestParserKraken2(unittest.TestCase):
 
     def test_sort_result_mixed(self):
         input_file = 'data/mixed.tab'
+        input_data = read_file(input_file)
         pct_threshold = 1
         num_threshold = 10000
-        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        result = parse_kraken2.read_kraken2(input_data, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
         self.assertTrue(sorted_result['Family'][1]['name'] == "Paenibacillaceae")
@@ -73,9 +82,10 @@ class TestParserKraken2(unittest.TestCase):
 
     def test_sort_result_high(self):
         input_file = 'data/high.tab'
+        input_data = read_file(input_file)
         pct_threshold = 1
         num_threshold = 10000
-        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        result = parse_kraken2.read_kraken2(input_data, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
         self.assertTrue(sorted_result['Genus'][0]['name'] == "Mycobacterium")
@@ -87,9 +97,10 @@ class TestParserKraken2(unittest.TestCase):
 
     def test_sort_result_low(self):
         input_file = 'data/low.tab'
+        input_data = read_file(input_file)
         pct_threshold = 1
         num_threshold = 10000
-        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        result = parse_kraken2.read_kraken2(input_data, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
         self.assertTrue(sorted_result['Genus'][0]['name'] == "Mycobacterium")
@@ -102,9 +113,10 @@ class TestParserKraken2(unittest.TestCase):
 
     def test_sort_result_xenopi(self):
         input_file = 'data/xenopi.tab'
+        input_data = read_file(input_file)
         pct_threshold = 1
         num_threshold = 10000
-        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        result = parse_kraken2.read_kraken2(input_data, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Mycobacteriaceae")
         self.assertTrue(sorted_result['Family'][1]['name'] == "Streptococcaceae")
@@ -121,9 +133,10 @@ class TestParserKraken2(unittest.TestCase):
 
     def test_sort_result_kansasii(self):
         input_file = 'data/kansasii.tab'
+        input_data = read_file(input_file)
         pct_threshold = 1
         num_threshold = 10000
-        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        result = parse_kraken2.read_kraken2(input_data, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
         self.assertTrue(sorted_result['Family'][0]['name'] == "Bacillaceae")
         self.assertTrue(sorted_result['Family'][1]['name'] == "Mycobacteriaceae")
@@ -137,9 +150,10 @@ class TestParserKraken2(unittest.TestCase):
 
     def test_sort_result_unclassified(self):
         input_file = 'data/unclassified.tab'
+        input_data = read_file(input_file)
         pct_threshold = 1
         num_threshold = 10000
-        result = parse_kraken2.read_kraken2(input_file, pct_threshold, num_threshold)
+        result = parse_kraken2.read_kraken2(input_data, pct_threshold, num_threshold)
         sorted_result = parse_kraken2.sort_result(result, pct_threshold, num_threshold)
 
         self.assertTrue('notes' in sorted_result['Family'].keys())
