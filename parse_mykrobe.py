@@ -6,12 +6,8 @@ import json
 import argparse
 from collections import defaultdict
 
-def read_mykrobe(file_name):
-    with open(file_name) as mykrobe:
-        data = json.load(mykrobe)
-    return data['tb_sample_id']['phylogenetics']
-
-def report_species(data):
+def report_species(mykrobe_data):
+    data = mykrobe_data['tb_sample_id']['phylogenetics']
     result = defaultdict(dict)
     result['phylo_group'] = data['phylo_group']
     result['sub_complex'] = data['sub_complex']
@@ -25,16 +21,15 @@ def report_species(data):
             for mut,mut_info in v.items():
                 coverage = mut_info['info']['coverage']['alternate']
                 mutations[mut] = coverage
-            r_lineages[k] = mutations    
+            r_lineages[k] = mutations
     result['lineages'] = r_lineages
     return result
-        
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--mykrobe_file", help="mykrobe output file")
-
     args = parser.parse_args()
-    result = read_mykrobe(args.mykrobe_file)
-    pretty_output = json.dumps(report_species(result), indent=4)
+    with open(args.mykrobe_file) as mykrobe:
+        data = json.load(mykrobe)
+    pretty_output = json.dumps(report_species(data), indent=4)
     print(pretty_output)
-        
