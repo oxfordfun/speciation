@@ -13,16 +13,17 @@ def report_species(mykrobe_data):
     result['sub_complex'] = data['sub_complex']
     result['species'] = data['species']
     lineages = data['lineage']['lineage']
-    result['lineage'] = lineages[0]
+    result['lineage'] = lineages
     r_lineages = dict()
     for lineage in lineages:
         l_calls = data['lineage']['calls'][lineage]
         for k, v in l_calls.items():
             mutations = dict()
-            for mut,mut_info in v.items():
-                coverage = mut_info['info']['coverage']['alternate']
-                mutations[mut] = coverage
-            r_lineages[k] = mutations
+            if v != None:
+                for mut,mut_info in v.items():
+                    coverage = mut_info['info']['coverage']['alternate']
+                    mutations[mut] = coverage
+                r_lineages[k] = mutations
     result['lineages'] = r_lineages
     return result
 
@@ -36,5 +37,5 @@ if __name__ == '__main__':
     pretty_output = json.dumps(report_species(data), indent=4)
     print(pretty_output)
 
-    with open(args.output_file, 'w') as outfile:   
+    with open(args.output_file, 'w') as outfile:
         outfile.write(pretty_output)

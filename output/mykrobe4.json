@@ -1,0 +1,80 @@
+{
+    "phylo_group": {
+        "Mycobacterium_tuberculosis_complex": {
+            "percent_coverage": 99.761,
+            "median_depth": 148.0
+        }
+    },
+    "sub_complex": {
+        "Unknown": {
+            "percent_coverage": -1,
+            "median_depth": -1
+        }
+    },
+    "species": {
+        "Mycobacterium_tuberculosis": {
+            "percent_coverage": 98.987,
+            "median_depth": 130
+        }
+    },
+    "lineage": [
+        "lineage1.1.2",
+        "lineage3.1.2.1"
+    ],
+    "lineages": {
+        "lineage1": {
+            "G615938A": {
+                "percent_coverage": 100.0,
+                "median_depth": 72,
+                "min_non_zero_depth": 69,
+                "kmer_count": 1439,
+                "klen": 21
+            }
+        },
+        "lineage1.1": {
+            "G4404247A": {
+                "percent_coverage": 100.0,
+                "median_depth": 146,
+                "min_non_zero_depth": 141,
+                "kmer_count": 2913,
+                "klen": 21
+            }
+        },
+        "lineage1.1.2": {
+            "G2622402A": {
+                "percent_coverage": 100.0,
+                "median_depth": 62,
+                "min_non_zero_depth": 59,
+                "kmer_count": 1266,
+                "klen": 21
+            }
+        },
+        "lineage3": {
+            "C3273107A": {
+                "percent_coverage": 100.0,
+                "median_depth": 96,
+                "min_non_zero_depth": 92,
+                "kmer_count": 1954,
+                "klen": 21
+            }
+        },
+        "lineage3.1.2": {
+            "G3722702C": {
+                "percent_coverage": 100.0,
+                "median_depth": 47,
+                "min_non_zero_depth": 45,
+                "kmer_count": 953,
+                "klen": 21
+            }
+        },
+        "lineage3.1.2.1": {
+            "C1237818G": {
+                "percent_coverage": 100.0,
+                "median_depth": 45,
+                "min_non_zero_depth": 43,
+                "kmer_count": 894,
+                "klen": 21
+            }
+        }
+    }
+}
