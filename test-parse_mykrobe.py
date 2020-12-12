@@ -1,4 +1,4 @@
-# Test parse_mykrobe.py
+m# Test parse_mykrobe.py
 # Run all tests: python test-parse_mykrobe.py
 # Run one test:  python3 test-parse_mykrobe.py TestParserMykrobe.test_mykrobe1
 #
@@ -35,8 +35,8 @@ class TestParserMykrobe(unittest.TestCase):
         input_data = read_file(input_file)
 
         result = parse_mykrobe.report_species(input_data)
-        self.assertEqual(result['lineage'],['lineage3'])
-        result_lineages = result['lineages']
+        self.assertEqual(result['lineages'],['lineage3'])
+        result_lineages = result['lineage3']
         self.assertTrue('lineage3' in result_lineages.keys())
         result_mutations = result_lineages['lineage3']
         self.assertTrue('C3273107A' in result_mutations.keys())
@@ -46,8 +46,8 @@ class TestParserMykrobe(unittest.TestCase):
         input_data = read_file(input_file)
 
         result = parse_mykrobe.report_species(input_data)
-        self.assertEqual(result['lineage'],['lineage1.1.2'])
-        result_lineages = result['lineages']
+        self.assertEqual(result['lineages'],['lineage1.1.2'])
+        result_lineages = result['lineage1.1.2']
 
         self.assertTrue('lineage1' in result_lineages.keys())
         result_mutations1 = result_lineages['lineage1']
@@ -66,8 +66,8 @@ class TestParserMykrobe(unittest.TestCase):
         input_data = read_file(input_file)
 
         result = parse_mykrobe.report_species(input_data)
-        self.assertEqual(result['lineage'],['lineage2.2.5'])
-        result_lineages = result['lineages']
+        self.assertEqual(result['lineages'],['lineage2.2.5'])
+        result_lineages = result['lineage2.2.5']
 
         self.assertTrue('lineage2' in result_lineages.keys())
         result_mutations1 = result_lineages['lineage2']
@@ -86,8 +86,8 @@ class TestParserMykrobe(unittest.TestCase):
         input_data = read_file(input_file)
 
         result = parse_mykrobe.report_species(input_data)
-        self.assertEqual(result['lineage'],['lineage1.1.2','lineage3.1.2.1'])
-        result_lineages = result['lineages']
+        self.assertEqual(result['lineages'],['lineage1.1.2','lineage3.1.2.1'])
+        result_lineages = result['lineage3.1.2.1']
 
         self.assertTrue('lineage3' in result_lineages.keys())
         result_mutations1 = result_lineages['lineage3']
@@ -100,6 +100,8 @@ class TestParserMykrobe(unittest.TestCase):
         self.assertTrue('lineage3.1.2.1' in result_lineages.keys())
         result_mutations3 = result_lineages['lineage3.1.2.1']
         self.assertTrue('C1237818G' in result_mutations3.keys())
+
+        result_lineages = result['lineage1.1.2']
 
         self.assertTrue('lineage1' in result_lineages.keys())
         result_mutations1 = result_lineages['lineage1']

@@ -13,9 +13,9 @@ def report_species(mykrobe_data):
     result['sub_complex'] = data['sub_complex']
     result['species'] = data['species']
     lineages = data['lineage']['lineage']
-    result['lineage'] = lineages
-    r_lineages = dict()
+    result['lineages'] = lineages
     for lineage in lineages:
+        r_lineages = defaultdict()
         l_calls = data['lineage']['calls'][lineage]
         for k, v in l_calls.items():
             mutations = dict()
@@ -24,7 +24,7 @@ def report_species(mykrobe_data):
                     coverage = mut_info['info']['coverage']['alternate']
                     mutations[mut] = coverage
                 r_lineages[k] = mutations
-    result['lineages'] = r_lineages
+            result[lineage] = r_lineages
     return result
 
 if __name__ == '__main__':

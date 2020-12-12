@@ -13,3 +13,4 @@
 ./parse_mykrobe.py -m data/mykrobe1.json -o output/mykrobe1.json
 ./parse_mykrobe.py -m data/mykrobe2.json -o output/mykrobe2.json
 ./parse_mykrobe.py -m data/mykrobe3.json -o output/mykrobe3.json
+./parse_mykrobe.py -m data/mykrobe4.json -o output/mykrobe4.json

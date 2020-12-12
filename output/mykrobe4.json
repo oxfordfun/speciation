@@ -17,11 +17,11 @@
             "median_depth": 130
         }
     },
-    "lineage": [
+    "lineages": [
         "lineage1.1.2",
         "lineage3.1.2.1"
     ],
-    "lineages": {
+    "lineage1.1.2": {
         "lineage1": {
             "G615938A": {
                 "percent_coverage": 100.0,
@@ -48,7 +48,9 @@
                 "kmer_count": 1266,
                 "klen": 21
             }
-        },
+        }
+    },
+    "lineage3.1.2.1": {
         "lineage3": {
             "C3273107A": {
                 "percent_coverage": 100.0,

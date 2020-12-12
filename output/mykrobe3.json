@@ -17,8 +17,10 @@
             "median_depth": 81
         }
     },
-    "lineage": "lineage2.2.5",
-    "lineages": {
+    "lineages": [
+        "lineage2.2.5"
+    ],
+    "lineage2.2.5": {
         "lineage2": {
             "G497491A": {
                 "percent_coverage": 100.0,

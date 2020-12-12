@@ -17,8 +17,10 @@
             "median_depth": 64
         }
     },
-    "lineage": "lineage3",
-    "lineages": {
+    "lineages": [
+        "lineage3"
+    ],
+    "lineage3": {
         "lineage3": {
             "C3273107A": {
                 "percent_coverage": 100.0,
