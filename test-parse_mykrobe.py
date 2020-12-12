@@ -1,4 +1,4 @@
-m# Test parse_mykrobe.py
+# Test parse_mykrobe.py
 # Run all tests: python test-parse_mykrobe.py
 # Run one test:  python3 test-parse_mykrobe.py TestParserMykrobe.test_mykrobe1
 #
